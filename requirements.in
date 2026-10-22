@@ -1,0 +1,7 @@
+# Jason Stys: pinned runtime for private local video processing; compile hash lock before install.
+fastapi==0.159.1
+uvicorn==0.54.0
+pydantic==2.14.1
+argon2-cffi==25.1.0
+av==19.0.2
+numpy==2.5.4

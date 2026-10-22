@@ -1,0 +1,426 @@
+<!doctype html>
+<!-- Jason Stys: accessible local video review shell; no third-party scripts, fonts or telemetry. -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Private aerial video review and conservative redaction by Jason Stys."
+    />
+    <title>Drone Video Privacy Studio · Jason Stys</title>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to workspace</a>
+    <header class="masthead">
+      <div class="brandmark" aria-hidden="true">◈</div>
+      <div>
+        <p class="eyebrow">JASON STYS / FIELD SYSTEMS</p>
+        <h1>Drone Video Privacy Studio</h1>
+        <p class="muted">Review with context. Share less.</p>
+      </div>
+      <span class="local-pill">LOCAL WORKSPACE</span>
+    </header>
+    <main id="main">
+      <div class="notice">
+        Authorized footage only. Redaction is not a guarantee of anonymity.
+        Review every frame and its context before sharing.
+      </div>
+      <p id="message" role="status" aria-live="polite"></p>
+      <section id="login-panel" class="panel login">
+        <p class="eyebrow">PRIVATE REVIEW DESK</p>
+        <h2>Sign in to your workspace</h2>
+        <p>
+          No cloud upload, analytics, advertising, or public registration.
+          Accounts are provisioned locally.
+        </p>
+        <form id="login-form">
+          <label
+            >Username<input
+              id="username"
+              autocomplete="username"
+              required
+              minlength="3"
+              maxlength="40" /></label
+          ><label
+            >Password<input
+              id="password"
+              type="password"
+              autocomplete="current-password"
+              required
+              maxlength="128" /></label
+          ><button type="submit">Sign in</button>
+        </form>
+      </section>
+      <section id="workspace" hidden>
+        <div class="toolbar">
+          <div>
+            <p class="eyebrow">REVIEW WORKSPACE</p>
+            <p id="identity"></p>
+          </div>
+          <button id="logout" class="secondary">Sign out</button>
+        </div>
+        <div class="layout">
+          <aside class="panel sidebar">
+            <h2>Clip library</h2>
+            <p class="muted">Private to your role. Expired clips are locked.</p>
+            <button id="refresh" class="secondary">Refresh library</button>
+            <div id="clip-list"></div>
+            <div id="ingest">
+              <hr />
+              <h3>Synthetic exercises</h3>
+              <label
+                >Scenario<select id="scenario">
+                  <option value="flood">Flood-response assessment</option>
+                  <option value="inspection">
+                    Authorized infrastructure inspection
+                  </option>
+                  <option value="training">Privacy-review training</option>
+                </select></label
+              ><button id="example">Create synthetic clip</button>
+              <hr />
+              <h3>Import authorized footage</h3>
+              <form id="import-form">
+                <label
+                  >Clip title<input
+                    id="title"
+                    required
+                    minlength="3"
+                    maxlength="80" /></label
+                ><label
+                  >Authorized purpose<textarea
+                    id="purpose"
+                    required
+                    minlength="10"
+                    maxlength="300"
+                  ></textarea></label
+                ><label
+                  >Retention, days<input
+                    id="retention"
+                    type="number"
+                    value="7"
+                    min="1"
+                    max="30"
+                    required /></label
+                ><label
+                  >MP4 file<input
+                    id="file"
+                    type="file"
+                    accept="video/mp4,.mp4"
+                    required
+                /></label>
+                <p class="muted">
+                  ≤20 MiB · ≤20 s · H.264/MPEG-4 · integer 1–30 fps · ≤1280×720,
+                  even dimensions. Other formats and VFR are rejected.
+                </p>
+                <button type="submit">Import for private review</button>
+              </form>
+            </div>
+          </aside>
+          <div class="desk">
+            <section id="empty" class="panel empty">
+              <p class="eyebrow">START WITH A CONTROLLED EXAMPLE</p>
+              <h2>A smaller footprint.<br />A clearer review trail.</h2>
+              <p>
+                Create a synthetic exercise or import authorized footage. Apply
+                solid masks, inspect the processed result, then request
+                independent review.
+              </p>
+              <div class="steps">
+                <span>01 / Minimize</span><span>02 / Inspect</span
+                ><span>03 / Review</span>
+              </div>
+            </section>
+            <section id="clip-panel" hidden>
+              <div class="clip-heading">
+                <div>
+                  <p class="eyebrow">ACTIVE CLIP</p>
+                  <h2 id="clip-title"></h2>
+                </div>
+                <span id="badge" class="badge"></span>
+              </div>
+              <div class="metrics" id="metrics"></div>
+              <div class="panel player-panel">
+                <div class="toolbar">
+                  <h3>Frame review</h3>
+                  <label class="inline"
+                    >Media<select id="media-kind">
+                      <option value="preview">
+                        Restricted, unredacted preview
+                      </option>
+                      <option value="redacted">Processed revision</option>
+                    </select></label
+                  >
+                </div>
+                <div class="video-wrap">
+                  <video
+                    id="video"
+                    controls
+                    playsinline
+                    preload="metadata"
+                    aria-label="Private video review"
+                  ></video>
+                  <img
+                    id="review-image"
+                    alt="Authenticated selected review frame"
+                    hidden
+                  />
+                  <svg
+                    id="mask-overlay"
+                    aria-label="Draft mask positions"
+                    role="img"
+                  ></svg>
+                </div>
+                <label
+                  >Frame<input
+                    id="frame"
+                    type="range"
+                    min="0"
+                    max="39"
+                    value="0"
+                /></label>
+                <div class="toolbar">
+                  <span id="frame-label"></span
+                  ><span id="position" class="muted"></span>
+                </div>
+                <div class="toolbar">
+                  <button id="frame-mode" class="secondary">
+                    Use frame-by-frame review</button
+                  ><button id="load-frame" class="secondary" hidden>
+                    Load selected frame</button
+                  ><span id="playback-status" class="muted"></span>
+                </div>
+                <p class="muted">
+                  Orange outlines are draft overlays only, not redacted pixels.
+                  Inspect the processed revision without overlays before
+                  requesting review.
+                </p>
+              </div>
+              <div class="two-col">
+                <section class="panel">
+                  <h3>Redaction plan</h3>
+                  <p>
+                    Solid fill, eight-pixel safety margin. Frame intervals
+                    include both endpoints. Coordinates are fractions of the
+                    full image (0–1).
+                  </p>
+                  <div id="editor">
+                    <form id="mask-form">
+                      <div class="form-grid">
+                        <label
+                          >First frame<input
+                            id="first"
+                            type="number"
+                            min="0"
+                            value="0"
+                            required /></label
+                        ><label
+                          >Last frame<input
+                            id="last"
+                            type="number"
+                            min="0"
+                            value="39"
+                            required /></label
+                        ><label
+                          >X<input
+                            id="x"
+                            type="number"
+                            min="0"
+                            max="1"
+                            step="0.001"
+                            value="0.06"
+                            required /></label
+                        ><label
+                          >Y<input
+                            id="y"
+                            type="number"
+                            min="0"
+                            max="1"
+                            step="0.001"
+                            value="0.15"
+                            required /></label
+                        ><label
+                          >Width<input
+                            id="width"
+                            type="number"
+                            min="0.001"
+                            max="1"
+                            step="0.001"
+                            value="0.24"
+                            required /></label
+                        ><label
+                          >Height<input
+                            id="height"
+                            type="number"
+                            min="0.001"
+                            max="1"
+                            step="0.001"
+                            value="0.18"
+                            required
+                        /></label>
+                      </div>
+                      <label
+                        >Reason<select id="reason">
+                          <option value="face">
+                            Face / person-shaped test patch
+                          </option>
+                          <option value="plate">License plate / text</option>
+                          <option value="sensitive">Sensitive region</option>
+                          <option value="other">Other identifier</option>
+                        </select></label
+                      ><button type="submit" class="secondary">
+                        Add mask to draft
+                      </button>
+                    </form>
+                    <button id="clear-masks" class="text-button">
+                      Clear draft masks
+                    </button>
+                  </div>
+                  <ol id="masks"></ol>
+                  <div id="plan-controls">
+                    <label
+                      >Private review notes<textarea
+                        id="note"
+                        maxlength="500"
+                        placeholder="What should the independent reviewer check?"
+                      ></textarea>
+                    </label>
+                    <details>
+                      <summary>Telemetry and synchronization</summary>
+                      <p>
+                        Optional JSON array of {ms, east_m, north_m,
+                        altitude_m}. Relative local coordinates only. Empty
+                        array means position unknown; endpoint drift &gt;250 ms
+                        or gaps &gt;1000 ms block approval.
+                      </p>
+                      <label
+                        >Telemetry JSON<textarea
+                          id="telemetry"
+                          spellcheck="false"
+                        >
+[]</textarea></label
+                      ><label
+                        >Timestamp offset, ms<input
+                          id="offset"
+                          type="number"
+                          min="-5000"
+                          max="5000"
+                          value="0" /></label
+                      ><button
+                        type="button"
+                        id="sample-telemetry"
+                        class="secondary"
+                      >
+                        Use synthetic aligned telemetry
+                      </button>
+                    </details>
+                    <button id="process">Process new revision</button>
+                    <p class="muted">
+                      Rebuilds from original pixels; requires a new independent
+                      approval. Maximum five revisions per clip.
+                    </p>
+                  </div>
+                </section>
+                <section class="panel">
+                  <h3>Review &amp; controlled export</h3>
+                  <p id="review-state">
+                    A processed revision and an independent reviewer are
+                    required.
+                  </p>
+                  <div id="alignment"></div>
+                  <form id="review-form" hidden>
+                    <label class="check"
+                      ><input id="full-check" type="checkbox" /> I checked the
+                      full processed clip, including first/last frames and
+                      moving identifiers.</label
+                    ><label class="check"
+                      ><input id="context-check" type="checkbox" /> I checked
+                      context, reflections, visible text, and authority to
+                      share.</label
+                    ><label
+                      >Decision<select id="decision">
+                        <option value="approve">
+                          Approve this revision for export
+                        </option>
+                        <option value="reject">
+                          Reject; further work needed
+                        </option>
+                      </select></label
+                    ><label
+                      >Independent review note<textarea
+                        id="review-note"
+                        required
+                        minlength="10"
+                        maxlength="500"
+                      ></textarea></label
+                    ><button type="submit">Record independent review</button>
+                  </form>
+                  <div id="exports" hidden>
+                    <a id="export-video" class="button" download
+                      >Download reviewed MP4</a
+                    ><a id="export-manifest" class="button secondary" download
+                      >Download minimal receipt</a
+                    >
+                  </div>
+                  <hr />
+                  <h3>Private evidence trail</h3>
+                  <button id="history" class="secondary">
+                    Show access &amp; revision history
+                  </button>
+                  <pre id="history-output"></pre>
+                </section>
+              </div>
+            </section>
+          </div>
+        </div>
+      </section>
+      <details class="panel help">
+        <summary>Help · how this works and what it does not do</summary>
+        <h2>A review tool, not an anonymity certificate</h2>
+        <p>
+          Operators import authorized short clips, add time-bounded rectangular
+          masks and private notes, then process a revision. Reviewers inspect
+          the entire processed video and record approval or rejection. Only the
+          current approved revision can be exported. Reprocessing invalidates
+          approval.
+        </p>
+        <p>
+          All exports are new video-only MP4s. Source audio, user-origin
+          metadata, subtitles, attachments, telemetry and private notes are not
+          copied. Technical MP4/encoder metadata remains. Visible scenery,
+          uniforms, reflections, shapes and voices in external material can
+          still identify people; this application has no automatic face/plate
+          detector or identity search.
+        </p>
+        <p>
+          Accounts, originals and processing stay in the local workspace.
+          Reviewers and admins are authorized organizational readers; the
+          computer owner can read disk files. This is not encrypted multi-tenant
+          cloud hosting, a police/medical evidence system, a live drone feed or
+          a legal compliance certification.
+        </p>
+        <p>
+          Expired clips cannot be accessed or exported. The OS owner can purge
+          expired app-owned media using the documented CLI. Backups/downloads
+          are independent copies and require their own retention policy. See the
+          repository’s user guide and security model for limits.
+        </p>
+      </details>
+    </main>
+    <footer>
+      Designed &amp; built by <strong>Jason Stys</strong>
+      <nav aria-label="Author links">
+        <a
+          href="https://github.com/JasonStys/drone-video-privacy-studio"
+          rel="noreferrer"
+          >Source &amp; help</a
+        ><a
+          href="https://www.linkedin.com/in/jason-stys-31b30b351/"
+          rel="noreferrer"
+          >Contact on LinkedIn</a
+        >
+      </nav>
+    </footer>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
