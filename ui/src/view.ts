@@ -14,6 +14,10 @@ export interface Sample {
   north_m: number;
   altitude_m: number;
 }
+/** Only these two fixed private media kinds may become a browser URL segment. */
+export function mediaKind(input: string): "preview" | "redacted" {
+  return input === "preview" ? "preview" : "redacted";
+}
 /** Validate draft intent before submission; server validation remains authoritative. */
 export function validMask(mask: Mask, frames: number): boolean {
   return (

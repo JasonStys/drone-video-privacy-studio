@@ -193,9 +193,14 @@ def test_cli_user_duplicate_and_transaction_rollback(app):
     auth.add_user(store, "new-user", secrets.token_urlsafe(24), "operator")
     with pytest.raises(sqlite3.IntegrityError):
         auth.add_user(store, "new-user", secrets.token_urlsafe(24), "operator")
-    with pytest.raises(RuntimeError), store.connect(True) as db:
-        store.event(db, "alice", "none", "should_rollback")
-        raise RuntimeError("Simulated failure")
+
+    def failed_transaction():
+        """An actual exceptional transaction must roll back before the caller reads the audit table."""
+        with store.connect(True) as db:
+            store.event(db, "alice", "none", "should_rollback")
+            raise RuntimeError("Simulated failure")
+
+    pytest.raises(RuntimeError, failed_transaction)
     with store.connect() as db:
         assert db.execute("SELECT count(*) FROM audit").fetchone()[0] == 0
 

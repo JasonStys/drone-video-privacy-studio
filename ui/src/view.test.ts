@@ -1,6 +1,17 @@
 /** @file Jason Stys: independent draft-geometry, timing and exact-version presentation tests. Lines: docs/SOURCE_MAP.md. */
 import { describe, expect, it } from "vitest";
-import { positionAt, reviewLabel, validMask, type Mask } from "./view";
+import {
+  mediaKind,
+  positionAt,
+  reviewLabel,
+  validMask,
+  type Mask,
+} from "./view";
+it("constrains media URL segments to a fixed union, including hostile DOM values", () => {
+  expect(mediaKind("preview")).toBe("preview");
+  expect(mediaKind("redacted")).toBe("redacted");
+  expect(mediaKind('x\" onerror=alert(1)')).toBe("redacted");
+});
 const mask: Mask = {
   first: 0,
   last: 39,

@@ -1,6 +1,7 @@
 /** @file Jason Stys: authenticated private video workspace, stale-response protection and safe DOM rendering. Lines: docs/SOURCE_MAP.md. */
 import "./style.css";
 import {
+  mediaKind,
   positionAt,
   reviewLabel,
   validMask,
@@ -276,7 +277,7 @@ function loadVideo(): void {
   );
   const video = el<HTMLVideoElement>("video");
   video.pause();
-  video.src = `/api/clips/${clip.id}/media/${value("media-kind")}?version=${clip.version}`;
+  video.src = `/api/clips/${clip.id}/media/${mediaKind(value("media-kind"))}?version=${clip.version}`;
   video.load();
   window.setTimeout(() => {
     if (
@@ -306,6 +307,11 @@ function useFrames(): void {
 /** Each frame is independently authenticated, version-bound and decoded; no image cache. */
 function loadFrame(): void {
   if (!clip) return;
+  const index = Number(value("frame"));
+  if (!Number.isInteger(index) || index < 0 || index >= clip.info.frames) {
+    text("message", "Choose a valid frame index");
+    return;
+  }
   const generation = videoGeneration;
   const image = el<HTMLImageElement>("review-image");
   frameLoading = true;
@@ -326,7 +332,7 @@ function loadFrame(): void {
       );
     }
   };
-  image.src = `/api/clips/${clip.id}/frame/${value("media-kind")}?version=${clip.version}&index=${value("frame")}`;
+  image.src = `/api/clips/${clip.id}/frame/${mediaKind(value("media-kind"))}?version=${clip.version}&index=${index}`;
 }
 /** Draw review-only outlines for the unredacted preview, never claim them as processed redaction. */
 function drawMasks(): void {
