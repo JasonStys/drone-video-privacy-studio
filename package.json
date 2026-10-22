@@ -12,8 +12,8 @@
     "build": "tsc --noEmit && vite build",
     "test": "vitest run --coverage",
     "test:e2e": "node tools/browser_checks.mjs",
-    "format": "prettier --write ui tests/browser package.json tsconfig.json vite.config.ts playwright.config.ts tools/*.mjs",
-    "format:check": "prettier --check ui tests/browser package.json tsconfig.json vite.config.ts playwright.config.ts tools/*.mjs"
+    "format": "prettier --write ui tests/browser package.json tsconfig.json vite.config.ts playwright.config.ts tools/*.mjs .github/workflows/*.yml",
+    "format:check": "prettier --check ui tests/browser package.json tsconfig.json vite.config.ts playwright.config.ts tools/*.mjs .github/workflows/*.yml"
   },
   "devDependencies": {
     "typescript": "6.0.3",
