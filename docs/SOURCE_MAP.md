@@ -102,6 +102,51 @@ Python/TypeScript ASTs index declarations, parameters and bindings; SQL lists no
 | `tests/test_models.py` | 47 | `ms` |
 | `tests/test_models.py` | 59 | `test_mask_budget_and_duplicate_timestamp(plan)` |
 | `tests/test_models.py` | 65 | `point` |
+| `tests/test_motion.py` | 16 | `anchor(frame, x, y, width, height)` |
+| `tests/test_motion.py` | 24 | `intent()` |
+| `tests/test_motion.py` | 29 | `test_rational_interpolation_contained_in_exact_partition_for_every_frame()` |
+| `tests/test_motion.py` | 31 | `randomizer` |
+| `tests/test_motion.py` | 32 | `_` |
+| `tests/test_motion.py` | 33 | `length` |
+| `tests/test_motion.py` | 34 | `anchors` |
+| `tests/test_motion.py` | 35 | `frame` |
+| `tests/test_motion.py` | 36 | `x` |
+| `tests/test_motion.py` | 36 | `y` |
+| `tests/test_motion.py` | 37 | `height` |
+| `tests/test_motion.py` | 37 | `width` |
+| `tests/test_motion.py` | 39 | `draft` |
+| `tests/test_motion.py` | 42 | `generated` |
+| `tests/test_motion.py` | 45 | `frame` |
+| `tests/test_motion.py` | 46 | `active` |
+| `tests/test_motion.py` | 46 | `mask` |
+| `tests/test_motion.py` | 48 | `mask` |
+| `tests/test_motion.py` | 49 | `fraction` |
+| `tests/test_motion.py` | 50 | `interpolated` |
+| `tests/test_motion.py` | 53 | `key` |
+| `tests/test_motion.py` | 76 | `test_invalid_keyframe_intent_rejected(changes)` |
+| `tests/test_motion.py` | 83 | `test_decoded_clip_bounds_are_authoritative(frames)` |
+| `tests/test_motion.py` | 88 | `test_actual_transcode_and_redecode_contains_manual_motion_without_touching_other_frames(tmp_path)` |
+| `tests/test_motion.py` | 94 | `output` |
+| `tests/test_motion.py` | 94 | `source` |
+| `tests/test_motion.py` | 96 | `draft` |
+| `tests/test_motion.py` | 103 | `masks` |
+| `tests/test_motion.py` | 104 | `info` |
+| `tests/test_motion.py` | 106 | `decoded` |
+| `tests/test_motion.py` | 107 | `frame` |
+| `tests/test_motion.py` | 107 | `index` |
+| `tests/test_motion.py` | 108 | `pixels` |
+| `tests/test_motion.py` | 110 | `ratio` |
+| `tests/test_motion.py` | 111 | `x` |
+| `tests/test_motion.py` | 111 | `y` |
+| `tests/test_motion.py` | 112 | `region` |
+| `tests/test_motion.py` | 122 | `test_private_read_only_helper_and_real_processing(client, imported, login, app, monkeypatch)` |
+| `tests/test_motion.py` | 124 | `endpoint` |
+| `tests/test_motion.py` | 125 | `before` |
+| `tests/test_motion.py` | 126 | `body` |
+| `tests/test_motion.py` | 127 | `result` |
+| `tests/test_motion.py` | 133 | `token` |
+| `tests/test_motion.py` | 144 | `concurrent(draft, frames)` |
+| `tests/test_motion.py` | 146 | `result` |
 | `tests/test_network.py` | 15 | `test_forwarded_headers_do_not_bypass_real_server_throttle(tmp_path, monkeypatch)` |
 | `tests/test_network.py` | 17 | `reservation` |
 | `tests/test_network.py` | 19 | `port` |
@@ -337,48 +382,53 @@ Python/TypeScript ASTs index declarations, parameters and bindings; SQL lists no
 | `workbench/__main__.py` | 28 | `args` |
 | `workbench/__main__.py` | 29 | `store` |
 | `workbench/__main__.py` | 35 | `password` |
-| `workbench/api.py` | 21 | `HEADERS` |
-| `workbench/api.py` | 29 | `BODY_GATE` |
-| `workbench/api.py` | 32 | `create_app(database, port)` |
-| `workbench/api.py` | 36 | `authority` |
-| `workbench/api.py` | 36 | `origin` |
-| `workbench/api.py` | 37 | `app` |
-| `workbench/api.py` | 43 | `boundary(request, call_next)` |
-| `workbench/api.py` | 45 | `acquired` |
-| `workbench/api.py` | 45 | `response` |
-| `workbench/api.py` | 61 | `media` |
-| `workbench/api.py` | 62 | `expected` |
-| `workbench/api.py` | 67 | `acquired` |
-| `workbench/api.py` | 68 | `data` |
-| `workbench/api.py` | 70 | `chunk` |
-| `workbench/api.py` | 75 | `response` |
-| `workbench/api.py` | 77 | `response` |
-| `workbench/api.py` | 79 | `response` |
-| `workbench/api.py` | 87 | `invalid(_request, error)` |
-| `workbench/api.py` | 92 | `e` |
-| `workbench/api.py` | 98 | `health()` |
-| `workbench/api.py` | 103 | `login(body, request)` |
-| `workbench/api.py` | 105 | `token` |
-| `workbench/api.py` | 105 | `user` |
-| `workbench/api.py` | 106 | `response` |
-| `workbench/api.py` | 111 | `me(request)` |
-| `workbench/api.py` | 116 | `logout(request)` |
-| `workbench/api.py` | 119 | `response` |
-| `workbench/api.py` | 124 | `clips(request)` |
-| `workbench/api.py` | 129 | `upload(request, title, purpose, retention)` |
-| `workbench/api.py` | 136 | `user` |
-| `workbench/api.py` | 137 | `data` |
-| `workbench/api.py` | 143 | `example(scenario, request)` |
-| `workbench/api.py` | 155 | `clip(identifier, request)` |
-| `workbench/api.py` | 160 | `history(identifier, request)` |
-| `workbench/api.py` | 165 | `process(identifier, body, request)` |
-| `workbench/api.py` | 170 | `review(identifier, body, request)` |
-| `workbench/api.py` | 172 | `user` |
-| `workbench/api.py` | 177 | `media(identifier, kind, request, version)` |
-| `workbench/api.py` | 184 | `path` |
-| `workbench/api.py` | 192 | `manifest(identifier, request)` |
-| `workbench/api.py` | 200 | `frame(identifier, kind, request, version, index)` |
-| `workbench/api.py` | 216 | `index()` |
+| `workbench/api.py` | 22 | `HEADERS` |
+| `workbench/api.py` | 30 | `BODY_GATE` |
+| `workbench/api.py` | 33 | `create_app(database, port)` |
+| `workbench/api.py` | 37 | `authority` |
+| `workbench/api.py` | 37 | `origin` |
+| `workbench/api.py` | 38 | `app` |
+| `workbench/api.py` | 44 | `boundary(request, call_next)` |
+| `workbench/api.py` | 46 | `acquired` |
+| `workbench/api.py` | 46 | `response` |
+| `workbench/api.py` | 62 | `media` |
+| `workbench/api.py` | 63 | `expected` |
+| `workbench/api.py` | 68 | `acquired` |
+| `workbench/api.py` | 69 | `data` |
+| `workbench/api.py` | 71 | `chunk` |
+| `workbench/api.py` | 76 | `response` |
+| `workbench/api.py` | 78 | `response` |
+| `workbench/api.py` | 80 | `response` |
+| `workbench/api.py` | 88 | `invalid(_request, error)` |
+| `workbench/api.py` | 93 | `e` |
+| `workbench/api.py` | 99 | `health()` |
+| `workbench/api.py` | 104 | `login(body, request)` |
+| `workbench/api.py` | 106 | `token` |
+| `workbench/api.py` | 106 | `user` |
+| `workbench/api.py` | 107 | `response` |
+| `workbench/api.py` | 112 | `me(request)` |
+| `workbench/api.py` | 117 | `logout(request)` |
+| `workbench/api.py` | 120 | `response` |
+| `workbench/api.py` | 125 | `clips(request)` |
+| `workbench/api.py` | 130 | `upload(request, title, purpose, retention)` |
+| `workbench/api.py` | 137 | `user` |
+| `workbench/api.py` | 138 | `data` |
+| `workbench/api.py` | 144 | `example(scenario, request)` |
+| `workbench/api.py` | 156 | `clip(identifier, request)` |
+| `workbench/api.py` | 161 | `history(identifier, request)` |
+| `workbench/api.py` | 166 | `process(identifier, body, request)` |
+| `workbench/api.py` | 171 | `motion_draft(identifier, body, request)` |
+| `workbench/api.py` | 173 | `user` |
+| `workbench/api.py` | 176 | `saved` |
+| `workbench/api.py` | 180 | `masks` |
+| `workbench/api.py` | 188 | `mask` |
+| `workbench/api.py` | 193 | `review(identifier, body, request)` |
+| `workbench/api.py` | 195 | `user` |
+| `workbench/api.py` | 200 | `media(identifier, kind, request, version)` |
+| `workbench/api.py` | 207 | `path` |
+| `workbench/api.py` | 215 | `manifest(identifier, request)` |
+| `workbench/api.py` | 223 | `frame(identifier, kind, request, version, index)` |
+| `workbench/api.py` | 239 | `index()` |
 | `workbench/auth.py` | 17 | `HASHER` |
 | `workbench/auth.py` | 18 | `DUMMY` |
 | `workbench/auth.py` | 19 | `VERIFY_GATE` |
@@ -504,20 +554,45 @@ Python/TypeScript ASTs index declarations, parameters and bindings; SQL lists no
 | `workbench/models.py` | 67 | `time_order(self)` |
 | `workbench/models.py` | 69 | `a` |
 | `workbench/models.py` | 69 | `b` |
-| `workbench/models.py` | 74 | `Review(class)` |
+| `workbench/models.py` | 74 | `MotionDraft(class)` |
 | `workbench/models.py` | 77 | `expected_version` |
-| `workbench/models.py` | 78 | `decision` |
-| `workbench/models.py` | 79 | `full_clip_checked` |
-| `workbench/models.py` | 80 | `context_checked` |
-| `workbench/models.py` | 81 | `note` |
-| `workbench/models.py` | 84 | `alignment(plan, frames, fps)` |
-| `workbench/models.py` | 86 | `points` |
-| `workbench/models.py` | 89 | `start` |
-| `workbench/models.py` | 90 | `end` |
-| `workbench/models.py` | 91 | `expected` |
-| `workbench/models.py` | 92 | `warnings` |
-| `workbench/models.py` | 95 | `a` |
-| `workbench/models.py` | 95 | `b` |
+| `workbench/models.py` | 78 | `start` |
+| `workbench/models.py` | 79 | `end` |
+| `workbench/models.py` | 80 | `segments` |
+| `workbench/models.py` | 83 | `keyframes(self)` |
+| `workbench/models.py` | 96 | `Review(class)` |
+| `workbench/models.py` | 99 | `expected_version` |
+| `workbench/models.py` | 100 | `decision` |
+| `workbench/models.py` | 101 | `full_clip_checked` |
+| `workbench/models.py` | 102 | `context_checked` |
+| `workbench/models.py` | 103 | `note` |
+| `workbench/models.py` | 106 | `alignment(plan, frames, fps)` |
+| `workbench/models.py` | 108 | `points` |
+| `workbench/models.py` | 111 | `start` |
+| `workbench/models.py` | 112 | `end` |
+| `workbench/models.py` | 113 | `expected` |
+| `workbench/models.py` | 114 | `warnings` |
+| `workbench/models.py` | 117 | `a` |
+| `workbench/models.py` | 117 | `b` |
+| `workbench/motion.py` | 10 | `motion_masks(draft, frames)` |
+| `workbench/motion.py` | 14 | `end` |
+| `workbench/motion.py` | 14 | `start` |
+| `workbench/motion.py` | 15 | `length` |
+| `workbench/motion.py` | 16 | `count` |
+| `workbench/motion.py` | 18 | `edges(frame)` |
+| `workbench/motion.py` | 20 | `fraction` |
+| `workbench/motion.py` | 23 | `a` |
+| `workbench/motion.py` | 23 | `b` |
+| `workbench/motion.py` | 30 | `masks` |
+| `workbench/motion.py` | 31 | `index` |
+| `workbench/motion.py` | 32 | `first` |
+| `workbench/motion.py` | 33 | `last` |
+| `workbench/motion.py` | 34 | `left` |
+| `workbench/motion.py` | 34 | `right` |
+| `workbench/motion.py` | 35 | `x` |
+| `workbench/motion.py` | 35 | `y` |
+| `workbench/motion.py` | 36 | `width` |
+| `workbench/motion.py` | 37 | `height` |
 | `workbench/retention.py` | 10 | `purge(store, confirm)` |
 | `workbench/retention.py` | 16 | `db` |
 | `workbench/retention.py` | 17 | `ids` |
@@ -671,77 +746,89 @@ Python/TypeScript ASTs index declarations, parameters and bindings; SQL lists no
 | `ui/src/main.ts` | 47 | `frameMode` |
 | `ui/src/main.ts` | 48 | `videoGeneration` |
 | `ui/src/main.ts` | 49 | `frameLoading` |
-| `ui/src/main.ts` | 51 | `el` |
-| `ui/src/main.ts` | 51 | `id` |
-| `ui/src/main.ts` | 55 | `value` |
-| `ui/src/main.ts` | 55 | `id` |
-| `ui/src/main.ts` | 59 | `text` |
-| `ui/src/main.ts` | 59 | `id` |
-| `ui/src/main.ts` | 59 | `message` |
-| `ui/src/main.ts` | 63 | `buttons` |
-| `ui/src/main.ts` | 64 | `button` |
-| `ui/src/main.ts` | 69 | `api` |
-| `ui/src/main.ts` | 69 | `path` |
-| `ui/src/main.ts` | 69 | `body` |
-| `ui/src/main.ts` | 69 | `raw` |
-| `ui/src/main.ts` | 70 | `generation` |
-| `ui/src/main.ts` | 71 | `response` |
-| `ui/src/main.ts` | 87 | `result` |
-| `ui/src/main.ts` | 98 | `task` |
-| `ui/src/main.ts` | 98 | `action` |
-| `ui/src/main.ts` | 101 | `generation` |
-| `ui/src/main.ts` | 108 | `error` |
-| `ui/src/main.ts` | 116 | `reset` |
-| `ui/src/main.ts` | 124 | `video` |
-| `ui/src/main.ts` | 143 | `id` |
-| `ui/src/main.ts` | 157 | `id` |
-| `ui/src/main.ts` | 161 | `library` |
-| `ui/src/main.ts` | 162 | `rows` |
-| `ui/src/main.ts` | 163 | `list` |
-| `ui/src/main.ts` | 165 | `row` |
-| `ui/src/main.ts` | 166 | `button` |
-| `ui/src/main.ts` | 180 | `signedIn` |
-| `ui/src/main.ts` | 180 | `next` |
-| `ui/src/main.ts` | 189 | `show` |
-| `ui/src/main.ts` | 189 | `next` |
-| `ui/src/main.ts` | 198 | `metrics` |
-| `ui/src/main.ts` | 200 | `[amount, label]` |
-| `ui/src/main.ts` | 206 | `div` |
-| `ui/src/main.ts` | 208 | `strong` |
-| `ui/src/main.ts` | 210 | `small` |
-| `ui/src/main.ts` | 215 | `kind` |
-| `ui/src/main.ts` | 218 | `frame` |
-| `ui/src/main.ts` | 262 | `loadVideo` |
-| `ui/src/main.ts` | 264 | `generation` |
-| `ui/src/main.ts` | 267 | `image` |
-| `ui/src/main.ts` | 278 | `video` |
-| `ui/src/main.ts` | 294 | `useFrames` |
-| `ui/src/main.ts` | 308 | `loadFrame` |
-| `ui/src/main.ts` | 310 | `index` |
-| `ui/src/main.ts` | 315 | `generation` |
-| `ui/src/main.ts` | 316 | `image` |
-| `ui/src/main.ts` | 338 | `drawMasks` |
-| `ui/src/main.ts` | 339 | `overlay` |
-| `ui/src/main.ts` | 341 | `list` |
-| `ui/src/main.ts` | 346 | `mask` |
-| `ui/src/main.ts` | 347 | `item` |
-| `ui/src/main.ts` | 355 | `rect` |
-| `ui/src/main.ts` | 359 | `[key, amount]` |
-| `ui/src/main.ts` | 372 | `frame` |
-| `ui/src/main.ts` | 386 | `event` |
-| `ui/src/main.ts` | 389 | `next` |
-| `ui/src/main.ts` | 398 | `csrf` |
-| `ui/src/main.ts` | 408 | `response` |
-| `ui/src/main.ts` | 433 | `event` |
-| `ui/src/main.ts` | 436 | `file` |
-| `ui/src/main.ts` | 439 | `params` |
-| `ui/src/main.ts` | 449 | `event` |
-| `ui/src/main.ts` | 452 | `mask` |
-| `ui/src/main.ts` | 480 | `_` |
-| `ui/src/main.ts` | 480 | `index` |
-| `ui/src/main.ts` | 498 | `body` |
-| `ui/src/main.ts` | 508 | `event` |
-| `ui/src/main.ts` | 546 | `video` |
+| `ui/src/main.ts` | 50 | `motionFields` |
+| `ui/src/main.ts` | 51 | `motionLegend` |
+| `ui/src/main.ts` | 53 | `motionHelp` |
+| `ui/src/main.ts` | 57 | `[id, title, initial]` |
+| `ui/src/main.ts` | 64 | `label` |
+| `ui/src/main.ts` | 66 | `input` |
+| `ui/src/main.ts` | 76 | `motionButton` |
+| `ui/src/main.ts` | 83 | `motionIntent` |
+| `ui/src/main.ts` | 110 | `request` |
+| `ui/src/main.ts` | 111 | `identity` |
+| `ui/src/main.ts` | 112 | `count` |
+| `ui/src/main.ts` | 113 | `result` |
+| `ui/src/main.ts` | 132 | `el` |
+| `ui/src/main.ts` | 132 | `id` |
+| `ui/src/main.ts` | 136 | `value` |
+| `ui/src/main.ts` | 136 | `id` |
+| `ui/src/main.ts` | 140 | `text` |
+| `ui/src/main.ts` | 140 | `id` |
+| `ui/src/main.ts` | 140 | `message` |
+| `ui/src/main.ts` | 144 | `buttons` |
+| `ui/src/main.ts` | 145 | `button` |
+| `ui/src/main.ts` | 150 | `api` |
+| `ui/src/main.ts` | 150 | `path` |
+| `ui/src/main.ts` | 150 | `body` |
+| `ui/src/main.ts` | 150 | `raw` |
+| `ui/src/main.ts` | 151 | `generation` |
+| `ui/src/main.ts` | 152 | `response` |
+| `ui/src/main.ts` | 168 | `result` |
+| `ui/src/main.ts` | 179 | `task` |
+| `ui/src/main.ts` | 179 | `action` |
+| `ui/src/main.ts` | 182 | `generation` |
+| `ui/src/main.ts` | 189 | `error` |
+| `ui/src/main.ts` | 197 | `reset` |
+| `ui/src/main.ts` | 205 | `video` |
+| `ui/src/main.ts` | 224 | `id` |
+| `ui/src/main.ts` | 238 | `id` |
+| `ui/src/main.ts` | 242 | `library` |
+| `ui/src/main.ts` | 243 | `rows` |
+| `ui/src/main.ts` | 244 | `list` |
+| `ui/src/main.ts` | 246 | `row` |
+| `ui/src/main.ts` | 247 | `button` |
+| `ui/src/main.ts` | 261 | `signedIn` |
+| `ui/src/main.ts` | 261 | `next` |
+| `ui/src/main.ts` | 270 | `show` |
+| `ui/src/main.ts` | 270 | `next` |
+| `ui/src/main.ts` | 279 | `metrics` |
+| `ui/src/main.ts` | 281 | `[amount, label]` |
+| `ui/src/main.ts` | 287 | `div` |
+| `ui/src/main.ts` | 289 | `strong` |
+| `ui/src/main.ts` | 291 | `small` |
+| `ui/src/main.ts` | 296 | `kind` |
+| `ui/src/main.ts` | 299 | `frame` |
+| `ui/src/main.ts` | 343 | `loadVideo` |
+| `ui/src/main.ts` | 345 | `generation` |
+| `ui/src/main.ts` | 348 | `image` |
+| `ui/src/main.ts` | 359 | `video` |
+| `ui/src/main.ts` | 375 | `useFrames` |
+| `ui/src/main.ts` | 389 | `loadFrame` |
+| `ui/src/main.ts` | 391 | `index` |
+| `ui/src/main.ts` | 396 | `generation` |
+| `ui/src/main.ts` | 397 | `image` |
+| `ui/src/main.ts` | 419 | `drawMasks` |
+| `ui/src/main.ts` | 420 | `overlay` |
+| `ui/src/main.ts` | 422 | `list` |
+| `ui/src/main.ts` | 427 | `mask` |
+| `ui/src/main.ts` | 428 | `item` |
+| `ui/src/main.ts` | 436 | `rect` |
+| `ui/src/main.ts` | 440 | `[key, amount]` |
+| `ui/src/main.ts` | 453 | `frame` |
+| `ui/src/main.ts` | 467 | `event` |
+| `ui/src/main.ts` | 470 | `next` |
+| `ui/src/main.ts` | 479 | `csrf` |
+| `ui/src/main.ts` | 489 | `response` |
+| `ui/src/main.ts` | 514 | `event` |
+| `ui/src/main.ts` | 517 | `file` |
+| `ui/src/main.ts` | 520 | `params` |
+| `ui/src/main.ts` | 530 | `event` |
+| `ui/src/main.ts` | 533 | `mask` |
+| `ui/src/main.ts` | 561 | `_` |
+| `ui/src/main.ts` | 561 | `index` |
+| `ui/src/main.ts` | 579 | `body` |
+| `ui/src/main.ts` | 589 | `event` |
+| `ui/src/main.ts` | 627 | `video` |
 | `ui/src/view.test.ts` | 15 | `mask` |
 | `ui/src/view.test.ts` | 32 | `change` |
 | `ui/src/view.test.ts` | 51 | `points` |
@@ -784,23 +871,24 @@ Python/TypeScript ASTs index declarations, parameters and bindings; SQL lists no
 | `tests/browser/workspace.spec.ts` | 106 | `file` |
 | `tests/browser/workspace.spec.ts` | 111 | `receiptDownload` |
 | `tests/browser/workspace.spec.ts` | 113 | `receipt` |
-| `tests/browser/workspace.spec.ts` | 127 | `{ page, }` |
-| `tests/browser/workspace.spec.ts` | 135 | `created` |
-| `tests/browser/workspace.spec.ts` | 136 | `response` |
-| `tests/browser/workspace.spec.ts` | 141 | `original` |
-| `tests/browser/workspace.spec.ts` | 143 | `title` |
-| `tests/browser/workspace.spec.ts` | 162 | `frameResponse` |
-| `tests/browser/workspace.spec.ts` | 163 | `response` |
-| `tests/browser/workspace.spec.ts` | 176 | `{ page, }` |
-| `tests/browser/workspace.spec.ts` | 181 | `release` |
-| `tests/browser/workspace.spec.ts` | 182 | `received` |
-| `tests/browser/workspace.spec.ts` | 183 | `hold` |
-| `tests/browser/workspace.spec.ts` | 183 | `resolve` |
-| `tests/browser/workspace.spec.ts` | 186 | `responseReady` |
-| `tests/browser/workspace.spec.ts` | 186 | `resolve` |
-| `tests/browser/workspace.spec.ts` | 189 | `route` |
-| `tests/browser/workspace.spec.ts` | 190 | `response` |
-| `tests/browser/workspace.spec.ts` | 206 | `{ page, }` |
+| `tests/browser/workspace.spec.ts` | 128 | `{ page, }` |
+| `tests/browser/workspace.spec.ts` | 165 | `{ page, }` |
+| `tests/browser/workspace.spec.ts` | 173 | `created` |
+| `tests/browser/workspace.spec.ts` | 174 | `response` |
+| `tests/browser/workspace.spec.ts` | 179 | `original` |
+| `tests/browser/workspace.spec.ts` | 181 | `title` |
+| `tests/browser/workspace.spec.ts` | 200 | `frameResponse` |
+| `tests/browser/workspace.spec.ts` | 201 | `response` |
+| `tests/browser/workspace.spec.ts` | 214 | `{ page, }` |
+| `tests/browser/workspace.spec.ts` | 219 | `release` |
+| `tests/browser/workspace.spec.ts` | 220 | `received` |
+| `tests/browser/workspace.spec.ts` | 221 | `hold` |
+| `tests/browser/workspace.spec.ts` | 221 | `resolve` |
+| `tests/browser/workspace.spec.ts` | 224 | `responseReady` |
+| `tests/browser/workspace.spec.ts` | 224 | `resolve` |
+| `tests/browser/workspace.spec.ts` | 227 | `route` |
+| `tests/browser/workspace.spec.ts` | 228 | `response` |
+| `tests/browser/workspace.spec.ts` | 244 | `{ page, }` |
 | `tools/browser_checks.mjs` | 8 | `project` |
 | `tools/browser_checks.mjs` | 9 | `result` |
 | `tools/source_index.mjs` | 7 | `collect` |

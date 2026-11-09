@@ -15,7 +15,8 @@ from fastapi.staticfiles import StaticFiles
 
 from workbench import auth, service
 from workbench.media import MAX_BYTES
-from workbench.models import Login, Plan, Review
+from workbench.models import Login, MotionDraft, Plan, Review
+from workbench.motion import motion_masks
 from workbench.store import Store
 
 HEADERS = {
@@ -165,6 +166,28 @@ def create_app(database: Path, port=8891):
     def process(identifier: str, body: Plan, request: Request):
         """Operator/admin creates a fully verified immutable revision; earlier approvals become stale."""
         return service.process(app.state.store, identifier, auth.authorize(request), body)
+
+    @app.post("/api/clips/{identifier}/motion-draft")
+    def motion_draft(identifier: str, body: MotionDraft, request: Request):
+        """Authorized private manual mask planning only; no revision, review or media is changed."""
+        user = auth.authorize(request)
+        if user["role"] not in {"operator", "admin"}:
+            raise HTTPException(403, "Operator or administrator role required")
+        saved = app.state.store.get(identifier, user)
+        if body.expected_version != saved["version"]:
+            raise HTTPException(409, "Clip revision changed; reload before planning masks")
+        try:
+            masks = motion_masks(body, saved["info"]["frames"])
+        except ValueError as error:
+            raise HTTPException(422, str(error)) from error
+        if app.state.store.get(identifier, user)["version"] != saved["version"]:
+            raise HTTPException(409, "Clip revision changed during planning; reload")
+        return {
+            "clip": identifier,
+            "version": saved["version"],
+            "masks": [mask.model_dump() for mask in masks],
+            "notice": "Draft static envelopes of manually assumed linear rectangle motion only. Inspect every frame: real motion may curve, stop, change size or leave this interval. Process a new verified revision and obtain independent review before export. No media or record changed.",
+        }
 
     @app.post("/api/clips/{identifier}/review")
     def review(identifier: str, body: Review, request: Request):

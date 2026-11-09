@@ -47,6 +47,87 @@ let logoutPending = false;
 let frameMode = false;
 let videoGeneration = 0;
 let frameLoading = false;
+const motionFields = document.createElement("fieldset");
+const motionLegend = document.createElement("legend");
+motionLegend.textContent = "Manual moving-mask helper";
+const motionHelp = document.createElement("p");
+motionHelp.textContent =
+  "Use First/Last frame and the current X/Y/Width/Height as the first keyframe. Enter the last keyframe rectangle below. Linear motion is assumed only between these marked frames; inspect every frame and process/review normally. Generated masks are conservative static envelopes, not detection or proof of anonymity.";
+motionFields.append(motionLegend, motionHelp);
+for (const [id, title, initial] of [
+  ["motion-x", "Last keyframe X", "0.6"],
+  ["motion-y", "Last keyframe Y", "0.1"],
+  ["motion-width", "Last keyframe width", "0.2"],
+  ["motion-height", "Last keyframe height", "0.2"],
+  ["motion-segments", "Envelope segments (1–32)", "8"],
+]) {
+  const label = document.createElement("label");
+  label.textContent = title;
+  const input = document.createElement("input");
+  input.id = id;
+  input.type = "number";
+  input.value = initial;
+  input.min = id === "motion-segments" ? "1" : "0";
+  input.max = id === "motion-segments" ? "32" : "1";
+  input.step = id === "motion-segments" ? "1" : "0.01";
+  label.append(input);
+  motionFields.append(label);
+}
+const motionButton = document.createElement("button");
+motionButton.type = "button";
+motionButton.textContent = "Add manual motion envelopes";
+motionFields.append(motionButton);
+el("mask-form").after(motionFields);
+
+/** Read literal keyframe intent; server validates geometry, privacy, clip version and frame bounds. */
+function motionIntent() {
+  return {
+    expected_version: clip?.version ?? 0,
+    segments: Number(value("motion-segments")),
+    start: {
+      first: Number(value("first")),
+      last: Number(value("first")),
+      x: Number(value("x")),
+      y: Number(value("y")),
+      width: Number(value("width")),
+      height: Number(value("height")),
+      reason: value("reason"),
+    },
+    end: {
+      first: Number(value("last")),
+      last: Number(value("last")),
+      x: Number(value("motion-x")),
+      y: Number(value("motion-y")),
+      width: Number(value("motion-width")),
+      height: Number(value("motion-height")),
+      reason: value("reason"),
+    },
+  };
+}
+motionButton.onclick = () =>
+  void task(async () => {
+    if (!clip) return;
+    const request = motionIntent(),
+      identity = clip.id,
+      count = masks.length;
+    const result = await api<{ masks: Mask[]; notice: string }>(
+      `/api/clips/${identity}/motion-draft`,
+      request,
+    );
+    if (
+      clip?.id !== identity ||
+      JSON.stringify(request) !== JSON.stringify(motionIntent()) ||
+      count !== masks.length
+    )
+      throw new Error("Clip or draft changed during planning; generate again");
+    if (masks.length + result.masks.length > 32)
+      throw new Error(
+        "Generated envelopes would exceed 32 masks; reduce segments or clear draft masks",
+      );
+    masks.push(...result.masks);
+    drawMasks();
+    motionHelp.textContent = result.notice;
+  });
 /** Fixed markup IDs only; user data never becomes HTML or an executable selector. */
 function el<T extends HTMLElement = HTMLElement>(id: string): T {
   return document.getElementById(id) as T;

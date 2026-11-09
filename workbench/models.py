@@ -71,6 +71,28 @@ class Plan(StrictModel):
         return self
 
 
+class MotionDraft(StrictModel):
+    """Two manually supplied keyframe rectangles; no detector or automatic identity tracking."""
+
+    expected_version: int = Field(ge=0)
+    start: Mask
+    end: Mask
+    segments: int = Field(ge=1, le=32)
+
+    @model_validator(mode="after")
+    def keyframes(self):
+        """Require two distinct single-frame anchors with one shared human-supplied reason."""
+        if (
+            self.start.first != self.start.last
+            or self.end.first != self.end.last
+            or self.start.first >= self.end.first
+        ):
+            raise ValueError("Two increasing single-frame anchors required")
+        if self.start.reason != self.end.reason:
+            raise ValueError("Keyframes must use the same reason")
+        return self
+
+
 class Review(StrictModel):
     """Independent human attestation, not proof of anonymity or lawful collection."""
 

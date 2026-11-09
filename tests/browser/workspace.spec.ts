@@ -124,6 +124,44 @@ test("solid-mask processing, real playback, independent review and controlled do
   await expect(page.locator("#badge")).toHaveText("V2 · REVIEW REQUIRED");
   await expect(page.locator("#exports")).toBeHidden();
 });
+
+test("manual two-keyframe envelopes remain a draft until verified processing and review", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await signIn(page);
+  await page.getByRole("button", { name: "Create synthetic clip" }).click();
+  await loaded(page);
+  await page.getByLabel("First frame", { exact: true }).fill("0");
+  await page.getByLabel("Last frame", { exact: true }).fill("39");
+  await page.getByLabel("X", { exact: true }).fill("0.1");
+  await page.getByLabel("Y", { exact: true }).fill("0.1");
+  await page.getByLabel("Width", { exact: true }).fill("0.2");
+  await page.getByLabel("Height", { exact: true }).fill("0.2");
+  await page.getByLabel("Last keyframe X", { exact: true }).fill("0.6");
+  await page.getByLabel("Envelope segments (1–32)", { exact: true }).fill("8");
+  await page
+    .getByRole("button", { name: "Add manual motion envelopes", exact: true })
+    .click();
+  await expect(page.locator("#masks li")).toHaveCount(8);
+  await expect(page.locator("#badge")).toHaveText("UNPROCESSED");
+  await expect(
+    page.getByText(
+      "Draft static envelopes of manually assumed linear rectangle motion only.",
+      { exact: false },
+    ),
+  ).toBeVisible();
+  await page.getByRole("button", { name: "Process new revision" }).click();
+  await expect(page.locator("#badge")).toHaveText("V1 · REVIEW REQUIRED");
+  await loaded(page);
+  expect(
+    (
+      await new AxeBuilder({ page })
+        .withTags(["wcag2a", "wcag2aa", "wcag21aa"])
+        .analyze()
+    ).violations,
+  ).toEqual([]);
+});
 test("real file import escapes title text and synchronizes an explicit frame", async ({
   page,
 }) => {

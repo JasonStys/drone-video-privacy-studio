@@ -10,6 +10,21 @@ This is a deliberately bounded privacy-engineering portfolio lab—not an identi
 
 ## What works
 
+**Manual moving-mask helper:** mark a rectangle at the first and last decoded
+frames of a chosen interval. Enter the last rectangle's geometry and choose
+1–32 segments. The application generates conservative static envelopes containing
+the assumed linearly interpolated rectangles in every frame of each segment.
+Reverse movement and changing rectangle size work; no extrapolation occurs
+outside the marked interval. Generated masks join the editable draft subject to
+the existing total32-mask cap, then use the same real encoder/redecode verification
+and independent current-revision review before export.
+
+This reduces repetitive manual rectangle entry; it performs no detection,
+recognition, identity tracking or automatic anonymity judgement. Real motion may
+curve, stop, change shape or leave the assumed envelope. Inspect every frame and
+add/revise masks as needed. The private owner/admin helper endpoint changes no
+media, revision or review. See [validation](docs/reports/PRACTICAL_WORKFLOWS_20261109.md).
+
 - **Actual video processing:** Python/PyAV decodes every frame, creates new RGB frames, applies solid rectangles with an eight-pixel margin and encodes a fresh H.264 MP4. A second decode verifies count, timing, stream/metadata allowlists and requested masked pixels. No stream-copy shortcut.
 - **Precise redaction intent:** up to 32 normalized rectangles, inclusive first/last frame indices, overlapping-mask unions, private annotations and a scrub-able TypeScript review desk. Processing always starts from the original, not a degraded prior revision.
 - **Restricted source access:** originals are stored privately, never served raw. Authorized staff can view a sanitized but **unredacted** review preview. Operators see only their own clips; designated reviewers/admins can read their organization's clips. This is one local organization, not multiple isolated tenants.
