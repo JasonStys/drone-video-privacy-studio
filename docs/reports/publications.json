@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "project": "drone-video-privacy-studio",
+  "author": "Jason Stys",
+  "editionDate": "2026-11-09",
+  "sourceBaseline": "e61722c7780f3114a873ce8187b48104affeca7d",
+  "sourceUrl": "https://github.com/JasonStys/drone-video-privacy-studio/tree/e61722c7780f3114a873ce8187b48104affeca7d",
+  "functionalEvidenceBaseline": "e61722c7780f3114a873ce8187b48104affeca7d",
+  "evidenceObservedAt": "2026-11-10T05:25:40.628667+00:00",
+  "workflowEvidence": [
+    {
+      "conclusion": "success",
+      "databaseId": 42710693114,
+      "event": "push",
+      "headSha": "e61722c7780f3114a873ce8187b48104affeca7d",
+      "name": "CodeQL",
+      "status": "completed",
+      "url": "https://github.com/JasonStys/drone-video-privacy-studio/actions/runs/42710693114"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 42710693128,
+      "event": "push",
+      "headSha": "e61722c7780f3114a873ce8187b48104affeca7d",
+      "name": "Validation",
+      "status": "completed",
+      "url": "https://github.com/JasonStys/drone-video-privacy-studio/actions/runs/42710693128"
+    }
+  ],
+  "summary": "Review two manually authored keyframes using conservative privacy envelopes with private revision and export checks.",
+  "rationale": "Makes redaction planning reproducible and keeps manual assumptions visible rather than claiming automatic recognition or tracking.",
+  "limitations": [
+    "Two manually authored rectangle keyframes and linear assumptions, not automatic detection, recognition or identity tracking.",
+    "Nonlinear movement or contextual identifiers require every-frame human review; envelopes can over-mask and do not certify anonymity.",
+    "Workspace protection trusts the local OS owner; no real sensitive footage or operational surveillance validation is claimed.",
+    "Source-first project with current package/service validation; no public native desktop application release is supplied."
+  ],
+  "documents": [
+    {
+      "filename": "project-guide.docx",
+      "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "bytes": 46857,
+      "sha256": "afca511bf0bd7412fc92a89dc8543a857c3b9d0a61a50b75c60cd699034b4a1c",
+      "sourceBaseline": "e61722c7780f3114a873ce8187b48104affeca7d",
+      "visualReview": {
+        "approved": true,
+        "method": "Every rendered page individually viewed at readable original resolution",
+        "pageCount": 6,
+        "renderedPageSha256": {
+          "page-1.png": "d33944a697f8d49d93dd70ecab56a83b767cd6036d9cf788f021e4aad7c4172b",
+          "page-2.png": "a88644c3001311e4819542a6741b37de97db98c9f7ffed84a307c9921f40ade8",
+          "page-3.png": "304fb1f37240b05230cb9fffbd4316b289f5aa094afcf373bb3c7ce1bb006592",
+          "page-4.png": "d038d91ce0c3754d095be0d8ef0f59dd93cafd0a5d03c8f7c37d23dd554a5c4d",
+          "page-5.png": "128a64a8defc09d497259c07382f994966ffe0c0b42b0648f1b949ed6554fd15",
+          "page-6.png": "42278b9e3ac3335b34c89f9546306db54f2d3aaae472afa6f3d5528414b4c6d0"
+        }
+      }
+    }
+  ],
+  "scope": "Reviewed documentation editions of the cited source. Checksums identify bytes, not authorship. Historical measurements retain their own dates; integration CI must be checked separately."
+}
