@@ -16,7 +16,7 @@ frames of a chosen interval. Enter the last rectangle's geometry and choose
 the assumed linearly interpolated rectangles in every frame of each segment.
 Reverse movement and changing rectangle size work; no extrapolation occurs
 outside the marked interval. Generated masks join the editable draft subject to
-the existing total32-mask cap, then use the same real encoder/redecode verification
+the existing total 32-mask cap, then use the same real encoder/redecode verification
 and independent current-revision review before export.
 
 This reduces repetitive manual rectangle entry; it performs no detection,
@@ -117,3 +117,9 @@ Every authored file has a responsibility in the [complete file catalog](docs/FIL
 Made by **Jason Stys** · [GitHub portfolio](https://github.com/JasonStys) · [Contact on LinkedIn](https://www.linkedin.com/in/jason-stys-31b30b351/).
 
 Original source is MIT licensed. PyAV and its bundled FFmpeg/codecs retain their own licenses and obligations; this repository distributes source/locks, not a repackaged native installer. See [third-party notes](docs/RESEARCH.md). No employer endorsement or regulatory certification is implied.
+
+## Documentation editions
+
+Start with the [organized handbook](docs/handbook.md) for current usage, design, security and test guidance. Reviewed downloadable editions: [project-guide.docx](docs/reports/project-guide.docx).
+
+[Publication identities and source scope](docs/reports/publications.json) · [Documentation validation record](docs/reports/documentation-refresh-2026-11-09.md). Historical results retain their own tested revision and date.
