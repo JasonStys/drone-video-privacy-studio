@@ -31,6 +31,9 @@ EXCLUDE = {
     "playwright-report",
 }
 SPECIAL = {
+    "docs/reports/windows-application-guide-0.2.1.docx": "Peer-reviewed current installed application Word guide with real screenshots and immutable source.",
+    "docs/reports/windows-application-guide-0.2.1.json": "Exact current document, image, source and reviewed-page identities.",
+    "docs/reports/installed-windows-0.2.1-2026-11-11.md": "Observed installed and same-profile upgrade results with operating limits.",
     "docs/handbook.md": "Organized project usage, architecture, security and evidence navigation.",
     "docs/reports/documentation-refresh-2026-11-09.md": "Documentation integration checks, dated observation scope and limitations.",
     "docs/reports/project-guide.docx": "Reviewed source-bound Word guide with dated validation observations and practical limits.",
