@@ -446,6 +446,99 @@ def test_offline_activation_requires_verified_source_path_and_exact_version(tmp_
         setup.activate(home, pin)
 
 
+@pytest.mark.parametrize("grow", [False, True])
+def test_descriptor_read_budget_uses_opened_size_plus_one_and_still_rejects_growth(
+    tmp_path, monkeypatch, grow
+):
+    """An actual small file must not request a128MiB allocation; growth through a separately preopened descriptor still fails."""
+    path, payload = tmp_path / "tiny.txt", b"known small content"
+    path.write_bytes(payload)
+    actual_fdopen, requests = setup.os.fdopen, []
+    with path.open("ab", buffering=0) as writer:
+
+        class ObservedFile:
+            def __init__(self, descriptor, mode):
+                self.file = actual_fdopen(descriptor, mode)
+
+            def __enter__(self):
+                self.file.__enter__()
+                return self
+
+            def __exit__(self, *args):
+                return self.file.__exit__(*args)
+
+            def fileno(self):
+                return self.file.fileno()
+
+            def read(self, size):
+                requests.append(size)
+                assert size == len(payload) + 1, (
+                    "Reader allocates its global cap instead of actual descriptor size"
+                )
+                if grow:
+                    writer.write(b"extra")
+                return self.file.read(size)
+
+        monkeypatch.setattr(setup.os, "fdopen", ObservedFile)
+        if grow:
+            with pytest.raises(ValueError, match="changed"):
+                setup.bounded_file(path, setup.MAX_MEMBER)
+        else:
+            assert setup.bounded_file(path, setup.MAX_MEMBER) == payload
+    assert requests == [len(payload) + 1]
+
+
+def test_normal_offline_ensure_runs_one_complete_authorizing_walk(tmp_path, monkeypatch):
+    """A presence check never repeats the expensive tree walk; activate still verifies every byte before import."""
+    raw, pin, _ = wheel_fixture()
+    home = tmp_path / "dependencies"
+    site = setup.install(home, pin, open_url=provider(raw, pin))
+    monkeypatch.setattr(setup, "selected_pin", lambda: pin)
+    monkeypatch.setattr(setup, "dependency_home", lambda: home)
+    actual, calls = setup.installed, []
+
+    def counted(home, pin):
+        calls.append(1)
+        return actual(home, pin)
+
+    monkeypatch.setattr(setup, "installed", counted)
+    monkeypatch.setattr(
+        setup, "download", lambda *_a, **_k: pytest.fail("offline startup fetched dependency")
+    )
+    monkeypatch.delitem(sys.modules, "av", raising=False)
+    monkeypatch.setattr(sys, "path", list(sys.path))
+    monkeypatch.setattr(sys, "dont_write_bytecode", False)
+    monkeypatch.setenv("DVP_DEPENDENCY_HOME", str(home))
+    monkeypatch.setattr(
+        setup.importlib,
+        "import_module",
+        lambda _name: SimpleNamespace(__file__=str(site / "av/__init__.py"), __version__="19.0.2"),
+    )
+    assert codec_window.ensure(interactive=False) is True and calls == [1]
+
+
+def test_presence_of_tampered_install_cannot_authorize_import_or_trigger_repair(
+    tmp_path, monkeypatch
+):
+    """The cheap presence predicate does not trust stale metadata or turn a corrupt install into a new download."""
+    raw, pin, _ = wheel_fixture()
+    home = tmp_path / "dependencies"
+    site = setup.install(home, pin, open_url=provider(raw, pin))
+    (site / "av/__init__.py").write_bytes(b"tampered; preserve")
+    assert setup.has_installation(home, pin)
+    monkeypatch.setattr(setup, "selected_pin", lambda: pin)
+    monkeypatch.setattr(setup, "dependency_home", lambda: home)
+    monkeypatch.setattr(
+        setup, "download", lambda *_a, **_k: pytest.fail("corruption triggered download")
+    )
+    monkeypatch.setattr(
+        setup.importlib, "import_module", lambda _name: pytest.fail("tampered dependency imported")
+    )
+    with pytest.raises(ValueError, match="differs"):
+        codec_window.ensure(interactive=False)
+    assert (site / "av/__init__.py").read_bytes() == b"tampered; preserve"
+
+
 def test_explicit_setup_cancel_opens_neither_network_nor_profile(tmp_path, monkeypatch):
     """Real Tk Cancel leaves even the dependency directory absent, before any accounts/footage are opened."""
     import tkinter as tk

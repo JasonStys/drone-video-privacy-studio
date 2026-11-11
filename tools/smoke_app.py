@@ -206,7 +206,12 @@ def main(argv=None):
         while True:
             remaining = deadline - time.monotonic()
             require(remaining > 0, "Actual native readiness deadline exceeded")
-            line = events.get(timeout=remaining)
+            try:
+                line = events.get(timeout=remaining)
+            except queue.Empty as error:
+                raise ValueError(
+                    "Actual native readiness deadline exceeded; startup output preserved"
+                ) from error
             require(line is not None, "Actual native process ended before readiness")
             if line.startswith("PORTFOLIO_READY "):
                 ready = json.loads(line.removeprefix("PORTFOLIO_READY "))
@@ -353,6 +358,11 @@ def main(argv=None):
                 process.wait(timeout=10)
         reader.join(timeout=3)
         (output / "service.log").write_text("".join(log))
+        if not passed:
+            # Only this isolated synthetic process is observed. Bound stdout
+            # and redact its disposable credential before exposing diagnostics.
+            diagnostic = "".join(log).replace(password, "[synthetic credential redacted]")[-12000:]
+            print("ACTUAL_NATIVE_FAILURE_OUTPUT\n" + diagnostic, flush=True)
         (output / "native.json").write_text(
             json.dumps(
                 {

@@ -1,6 +1,9 @@
 """Jason Stys: same full application or fixed private media-worker entry. Lines: docs/SOURCE_MAP.md."""
 
+import json
+import os
 import sys
+import time
 
 
 def main():
@@ -12,12 +15,18 @@ def main():
         from workbench.codec_window import ensure
 
         console_setup = sys.argv[1:] == ["--install-codecs"]
+        started = time.perf_counter()
+        diagnostic = bool(os.environ.get("PORTABLE_SMOKE_NONCE"))
+        if diagnostic:
+            print('PORTFOLIO_CODEC_PHASE {"phase":"verification_start"}', flush=True)
         try:
             if not ensure(interactive=not worker_mode and "--no-window" not in sys.argv[1:], console=console_setup):
                 return 0
         except (OSError, ValueError, RuntimeError, ImportError) as error:
             print(f"Video dependency setup failed: {error}", file=sys.stderr)
             return 1
+        if diagnostic:
+            print("PORTFOLIO_CODEC_PHASE " + json.dumps({"phase": "verification_complete", "elapsed_seconds": time.perf_counter() - started}), flush=True)
         if console_setup:
             print("Video dependency installed and verified; subsequent use is offline.", flush=True)
             return 0

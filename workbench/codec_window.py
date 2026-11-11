@@ -121,7 +121,7 @@ def description(pin):
 def ensure(*, interactive=True, console=False):
     """Require prior offline verification; only an explicit normal GUI/console choice can install an absent wheel."""
     pin, home = codec_setup.selected_pin(), codec_setup.dependency_home()
-    if codec_setup.installed(home, pin) is None:
+    if not codec_setup.has_installation(home, pin):
         if console:
             print(TERMS + "\n\n" + description(pin), flush=True)
             if (

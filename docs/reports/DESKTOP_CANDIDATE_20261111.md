@@ -79,12 +79,35 @@ Its RELEASE.json honestly labels baseline
 It is a development observation, not a clean committed release. Fresh exact-source
 native/hosted results must be recorded separately after they actually complete.
 
+## Startup cost and preserved failure
+
+The later Windows native job at source
+`ee01a117c74be2f31e2c45cc369449c7e26e88ea` completed freezing/setup but exceeded
+the existing 20-second owned-readiness deadline before a readiness marker arrived.
+[Actual failed job](https://github.com/JasonStys/drone-video-privacy-studio/actions/runs/42972885172/job/130365212226).
+Linux and macOS passed that revision; this does not turn Windows into a pass.
+The original runner did not print its saved child startup log, so the exact hosted
+cause is unproven. Bounded sanitized phase/failure output now makes later failures
+inspectable without uploading profiles, media or binary artifacts.
+
+Independent local measurement of the same real pinned wheel/tree found an
+avoidable allocation cost: each tiny file requested the entire 128 MiB member
+cap, and ordinary startup performed the complete verification twice. Three
+before samples were 7.525, 7.409 and 7.530 seconds per walk. Reads now request only
+the opened descriptor size plus one byte, preserving growth/truncation detection,
+and a non-authorizing presence check only chooses setup; activation still checks
+the exact complete tree once before import. Three local after samples were
+0.559, 0.380 and 0.397 seconds per walk. This is a local method comparison, not
+hosted timing or proof of the earlier timeout's cause. Independent real-descriptor
+growth/allocation tests and tamper-no-import/no-download tests pass. The 20-second
+readiness and all original browser/worker deadlines remain unchanged.
+
 ## Source tests and limits
 
-Final full source validation passed **256 parent Python tests plus all 13 mandatory
-isolated notice cases**, with **93.86% branch-aware package coverage** against the
+Final full source validation passed **260 parent Python tests plus all 13 mandatory
+isolated notice cases**, with **93.88% branch-aware package coverage** against the
 unchanged 90% floor. One existing Windows symlink-capability skip is explicitly
-reported; Linux and macOS must exercise that capability in CI. These include 51 new
+reported; Linux and macOS must exercise that capability in CI. These include 55 new
 real-wheel/Tk contracts and five codec-free bundle-inventory cases, plus the
 codec-free shell/entry failure and actual notice-inventory regressions. Corrupt,
 truncated, oversized or offline providers, wrong ABI/version/name, unsafe ZIP paths

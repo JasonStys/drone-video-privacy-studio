@@ -56,7 +56,9 @@ def bounded_file(path: Path, limit: int) -> bytes:
             stat.S_ISREG(info.st_mode) and 0 <= info.st_size <= limit,
             "Dependency file type/size invalid",
         )
-        raw = stream.read(limit + 1)
+        # Size was read from this opened descriptor. One extra byte detects
+        # growth without allocating the128MiB member cap for each tiny file.
+        raw = stream.read(min(info.st_size + 1, limit + 1))
     require(
         len(raw) == info.st_size and len(raw) <= limit,
         "Dependency file changed or exceeded its bound",
@@ -288,6 +290,14 @@ def download(pin, *, open_url=None) -> bytes:
 def pointer_name(pin):
     """An immutable wheel digest names only its small atomic activation pointer."""
     return f"av-{VERSION}-{pin['sha256']}.json"
+
+
+def has_installation(home: Path, pin: dict) -> bool:
+    """Presence chooses setup only; it never authorizes imports or substitutes for activate's complete verification."""
+    if not store(home):
+        return False
+    pointer = home / pointer_name(pin)
+    return pointer.exists() or pointer.is_symlink() or pointer.is_junction()
 
 
 def installed(home: Path, pin: dict):
