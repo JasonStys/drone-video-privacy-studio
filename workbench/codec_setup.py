@@ -139,7 +139,10 @@ def dependency_home() -> Path:
             base = Path(os.environ.get("XDG_DATA_HOME", str(Path.home() / ".local/share")))
         result = base / "JasonStysPortfolio" / PRODUCT / "dependencies"
     require(
-        result.is_absolute() and result.resolve() == result,
+        result.is_absolute()
+        and not result.is_symlink()
+        and not result.is_junction()
+        and result.resolve() == result,
         "Dependency directory must be an absolute non-linked path",
     )
     return result
@@ -148,7 +151,10 @@ def dependency_home() -> Path:
 def store(home: Path, *, create=False):
     """Never adopt unknown nonempty directories or replace an existing dependency-store identity."""
     require(
-        home.is_absolute() and home.resolve() == home and not home.is_symlink(),
+        home.is_absolute()
+        and not home.is_symlink()
+        and not home.is_junction()
+        and home.resolve() == home,
         "Linked dependency store refused",
     )
     marker = home / "dependency-store.json"
@@ -303,17 +309,62 @@ def installed(home: Path, pin: dict):
     )
     directory = home / value["directory"]
     require(
-        directory.resolve() == directory and directory.is_dir(), "Dependency install path changed"
+        not directory.is_symlink()
+        and not directory.is_junction()
+        and directory.resolve() == directory
+        and directory.is_dir(),
+        "Dependency install path changed",
     )
     files = wheel_members(bounded_file(directory / "official.whl", MAX_WHEEL), pin)
     site = directory / "site"
-    actual = {}
-    for path in site.rglob("*"):
-        require(not path.is_symlink(), "Linked dependency member refused")
-        if path.is_file():
-            actual[path.relative_to(site).as_posix()] = path
-        else:
-            require(path.is_dir(), "Unknown dependency file type")
+    require(
+        not site.is_symlink()
+        and not site.is_junction()
+        and site.is_dir()
+        and site.resolve() == site,
+        "Linked/missing dependency site refused",
+    )
+    expected_directories = {
+        parent.as_posix()
+        for name in files
+        for parent in PurePosixPath(name).parents
+        if parent != PurePosixPath(".")
+    }
+    actual, visited, pending = {}, 0, [site]
+    while pending:
+        current = pending.pop()
+        require(
+            current.resolve() == current and not current.is_symlink() and not current.is_junction(),
+            "Linked dependency directory refused before traversal",
+        )
+        with os.scandir(current) as entries:
+            for entry in entries:
+                visited += 1
+                require(
+                    visited <= len(files) + len(expected_directories),
+                    "Installed wheel traversal exceeds exact expected tree",
+                )
+                path = Path(entry.path)
+                name = path.relative_to(site).as_posix()
+                # Unknown directories are refused before being queued. Never
+                # traverse an arbitrary subtree to discover its mismatch later.
+                require(
+                    name in files or name in expected_directories,
+                    "Unexpected installed wheel entry",
+                )
+                require(
+                    not entry.is_symlink() and not path.is_junction() and path.resolve() == path,
+                    "Linked dependency member refused",
+                )
+                info = entry.stat(follow_symlinks=False)
+                if name in expected_directories:
+                    require(
+                        stat.S_ISDIR(info.st_mode), "Expected dependency directory changed type"
+                    )
+                    pending.append(path)
+                else:
+                    require(stat.S_ISREG(info.st_mode), "Expected dependency file changed type")
+                    actual[name] = path
     require(set(actual) == set(files), "Installed wheel inventory differs")
     for name, raw in files.items():
         require(bounded_file(actual[name], MAX_MEMBER) == raw, "Installed wheel member differs")

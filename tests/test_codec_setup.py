@@ -5,6 +5,7 @@ import csv
 import hashlib
 import io
 import json
+import os
 import stat
 import sys
 import time
@@ -360,6 +361,59 @@ def test_unknown_nonempty_dependency_directory_and_failed_atomic_publish_preserv
         setup.install(owned, pin, open_url=provider(raw, pin))
     assert (owned / setup.pointer_name(pin)).read_bytes() == b"other writer's exact evidence"
     assert not any(p.name.startswith(".installed-") for p in owned.iterdir())
+
+
+@pytest.mark.parametrize("nested", [False, True])
+def test_offline_verification_refuses_unknown_directories_before_descending(
+    tmp_path, monkeypatch, nested
+):
+    """The old rglob accepted empty extras and traversed populated extras; neither is permitted by the exact tree."""
+    raw, pin, _ = wheel_fixture()
+    home = tmp_path / "dependencies"
+    site = setup.install(home, pin, open_url=provider(raw, pin))
+    extra = site / "av" / "unexpected"
+    extra.mkdir()
+    if nested:
+        for index in range(20):
+            child = extra / str(index) / "deeper"
+            child.mkdir(parents=True)
+            (child / "inert.txt").write_bytes(b"unrelated; preserve")
+    actual_scandir, visited = setup.os.scandir, []
+
+    def bounded_scan(path):
+        path = Path(path)
+        assert not path.is_relative_to(extra), "Unexpected subtree was traversed before refusal"
+        visited.append(path)
+        return actual_scandir(path)
+
+    monkeypatch.setattr(setup.os, "scandir", bounded_scan)
+    with pytest.raises(ValueError, match="Unexpected installed wheel entry|traversal exceeds"):
+        setup.installed(home, pin)
+    assert extra.is_dir() and all(not path.is_relative_to(extra) for path in visited)
+    assert len(visited) <= 4
+
+
+@pytest.mark.parametrize("part", ["site", "av"])
+def test_actual_junction_or_symlink_cannot_replace_expected_dependency_directories(tmp_path, part):
+    """Use a genuine Windows junction or POSIX symlink, including the site root rather than only leaf files."""
+    raw, pin, _ = wheel_fixture()
+    home = tmp_path / "dependencies"
+    site = setup.install(home, pin, open_url=provider(raw, pin))
+    original = site if part == "site" else site / "av"
+    retained = site.parent / ("retained-" + part)
+    original.rename(retained)
+    if os.name == "nt":
+        import _winapi
+
+        _winapi.CreateJunction(str(retained), str(original))
+        assert original.is_junction()
+    else:
+        original.symlink_to(retained, target_is_directory=True)
+        assert original.is_symlink()
+    with pytest.raises(ValueError, match="Linked"):
+        setup.installed(home, pin)
+    target = retained / "__init__.py" if part == "av" else retained / "av/__init__.py"
+    assert target.read_bytes().startswith(b"raise RuntimeError")
 
 
 def test_offline_activation_requires_verified_source_path_and_exact_version(tmp_path, monkeypatch):

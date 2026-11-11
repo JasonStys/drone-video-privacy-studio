@@ -85,130 +85,153 @@ Python/TypeScript ASTs index declarations, parameters and bindings; SQL lists no
 | `tests/test_codec_bootstrap_entry.py` | 53 | `test_failed_frozen_dependency_import_is_nonzero_without_profile_fallback(monkeypatch, capsys)` |
 | `tests/test_codec_bootstrap_entry.py` | 58 | `fail()` |
 | `tests/test_codec_bootstrap_entry.py` | 66 | `_` |
-| `tests/test_codec_setup.py` | 21 | `wheel_fixture()` |
-| `tests/test_codec_setup.py` | 23 | `dist` |
-| `tests/test_codec_setup.py` | 24 | `tag` |
-| `tests/test_codec_setup.py` | 25 | `files` |
-| `tests/test_codec_setup.py` | 34 | `records` |
-| `tests/test_codec_setup.py` | 35 | `writer` |
-| `tests/test_codec_setup.py` | 36 | `name` |
-| `tests/test_codec_setup.py` | 36 | `raw` |
-| `tests/test_codec_setup.py` | 47 | `output` |
-| `tests/test_codec_setup.py` | 48 | `archive` |
-| `tests/test_codec_setup.py` | 49 | `name` |
-| `tests/test_codec_setup.py` | 49 | `raw` |
-| `tests/test_codec_setup.py` | 50 | `item` |
-| `tests/test_codec_setup.py` | 56 | `name` |
-| `tests/test_codec_setup.py` | 56 | `raw` |
-| `tests/test_codec_setup.py` | 59 | `item` |
-| `tests/test_codec_setup.py` | 62 | `raw` |
-| `tests/test_codec_setup.py` | 63 | `pin` |
-| `tests/test_codec_setup.py` | 73 | `Response(class)` |
-| `tests/test_codec_setup.py` | 76 | `__init__(self, raw, url)` |
-| `tests/test_codec_setup.py` | 80 | `geturl(self)` |
-| `tests/test_codec_setup.py` | 84 | `provider(raw, pin, calls)` |
-| `tests/test_codec_setup.py` | 87 | `open_url(url)` |
-| `tests/test_codec_setup.py` | 95 | `test_exact_published_wheel_manifest_retains_platform_abi_and_lock_pins()` |
-| `tests/test_codec_setup.py` | 97 | `pins` |
-| `tests/test_codec_setup.py` | 98 | `key` |
-| `tests/test_codec_setup.py` | 98 | `row` |
-| `tests/test_codec_setup.py` | 112 | `lock` |
-| `tests/test_codec_setup.py` | 113 | `row` |
-| `tests/test_codec_setup.py` | 150 | `test_unsupported_runtime_or_abi_never_selects_a_fallback(changes)` |
-| `tests/test_codec_setup.py` | 152 | `values` |
-| `tests/test_codec_setup.py` | 163 | `test_real_wheel_install_is_inert_complete_and_offline_reusable(tmp_path, monkeypatch)` |
-| `tests/test_codec_setup.py` | 165 | `files` |
-| `tests/test_codec_setup.py` | 165 | `pin` |
-| `tests/test_codec_setup.py` | 165 | `raw` |
-| `tests/test_codec_setup.py` | 166 | `calls` |
-| `tests/test_codec_setup.py` | 166 | `home` |
-| `tests/test_codec_setup.py` | 168 | `site` |
-| `tests/test_codec_setup.py` | 171 | `p` |
-| `tests/test_codec_setup.py` | 177 | `before` |
-| `tests/test_codec_setup.py` | 178 | `p` |
-| `tests/test_codec_setup.py` | 183 | `p` |
-| `tests/test_codec_setup.py` | 190 | `test_failed_download_does_not_publish_or_clobber_existing_files(tmp_path, kind)` |
-| `tests/test_codec_setup.py` | 192 | `_` |
-| `tests/test_codec_setup.py` | 192 | `pin` |
-| `tests/test_codec_setup.py` | 192 | `raw` |
-| `tests/test_codec_setup.py` | 193 | `home` |
-| `tests/test_codec_setup.py` | 195 | `protected` |
-| `tests/test_codec_setup.py` | 197 | `altered` |
-| `tests/test_codec_setup.py` | 207 | `fetch(_url)` |
-| `tests/test_codec_setup.py` | 219 | `p` |
-| `tests/test_codec_setup.py` | 234 | `test_actual_traversal_wheels_are_rejected_before_extraction(tmp_path, name)` |
-| `tests/test_codec_setup.py` | 236 | `_` |
-| `tests/test_codec_setup.py` | 236 | `pin` |
-| `tests/test_codec_setup.py` | 236 | `raw` |
-| `tests/test_codec_setup.py` | 261 | `test_independent_wheel_structure_metadata_record_and_inflation_negatives(kind, monkeypatch)` |
-| `tests/test_codec_setup.py` | 263 | `dist` |
-| `tests/test_codec_setup.py` | 265 | `change(files)` |
-| `tests/test_codec_setup.py` | 285 | `_` |
-| `tests/test_codec_setup.py` | 285 | `pin` |
-| `tests/test_codec_setup.py` | 285 | `raw` |
-| `tests/test_codec_setup.py` | 296 | `output` |
-| `tests/test_codec_setup.py` | 297 | `source` |
-| `tests/test_codec_setup.py` | 297 | `target` |
-| `tests/test_codec_setup.py` | 298 | `item` |
-| `tests/test_codec_setup.py` | 299 | `data` |
-| `tests/test_codec_setup.py` | 301 | `data` |
-| `tests/test_codec_setup.py` | 307 | `raw` |
-| `tests/test_codec_setup.py` | 308 | `pin` |
-| `tests/test_codec_setup.py` | 318 | `test_tampered_installed_dependency_is_preserved_and_not_repaired(tmp_path, kind)` |
-| `tests/test_codec_setup.py` | 320 | `_` |
-| `tests/test_codec_setup.py` | 320 | `pin` |
-| `tests/test_codec_setup.py` | 320 | `raw` |
-| `tests/test_codec_setup.py` | 321 | `home` |
-| `tests/test_codec_setup.py` | 322 | `site` |
-| `tests/test_codec_setup.py` | 323 | `path` |
-| `tests/test_codec_setup.py` | 340 | `test_unknown_nonempty_dependency_directory_and_failed_atomic_publish_preserve_prior_state(tmp_path, monkeypatch)` |
-| `tests/test_codec_setup.py` | 344 | `home` |
-| `tests/test_codec_setup.py` | 347 | `_` |
-| `tests/test_codec_setup.py` | 347 | `pin` |
-| `tests/test_codec_setup.py` | 347 | `raw` |
-| `tests/test_codec_setup.py` | 350 | `p` |
-| `tests/test_codec_setup.py` | 351 | `owned` |
-| `tests/test_codec_setup.py` | 353 | `competitor(_pending, pointer)` |
-| `tests/test_codec_setup.py` | 354 | `output` |
-| `tests/test_codec_setup.py` | 362 | `p` |
-| `tests/test_codec_setup.py` | 365 | `test_offline_activation_requires_verified_source_path_and_exact_version(tmp_path, monkeypatch)` |
-| `tests/test_codec_setup.py` | 367 | `_` |
-| `tests/test_codec_setup.py` | 367 | `pin` |
-| `tests/test_codec_setup.py` | 367 | `raw` |
-| `tests/test_codec_setup.py` | 368 | `home` |
-| `tests/test_codec_setup.py` | 369 | `site` |
-| `tests/test_codec_setup.py` | 395 | `test_explicit_setup_cancel_opens_neither_network_nor_profile(tmp_path, monkeypatch)` |
+| `tests/test_codec_setup.py` | 22 | `wheel_fixture()` |
+| `tests/test_codec_setup.py` | 24 | `dist` |
+| `tests/test_codec_setup.py` | 25 | `tag` |
+| `tests/test_codec_setup.py` | 26 | `files` |
+| `tests/test_codec_setup.py` | 35 | `records` |
+| `tests/test_codec_setup.py` | 36 | `writer` |
+| `tests/test_codec_setup.py` | 37 | `name` |
+| `tests/test_codec_setup.py` | 37 | `raw` |
+| `tests/test_codec_setup.py` | 48 | `output` |
+| `tests/test_codec_setup.py` | 49 | `archive` |
+| `tests/test_codec_setup.py` | 50 | `name` |
+| `tests/test_codec_setup.py` | 50 | `raw` |
+| `tests/test_codec_setup.py` | 51 | `item` |
+| `tests/test_codec_setup.py` | 57 | `name` |
+| `tests/test_codec_setup.py` | 57 | `raw` |
+| `tests/test_codec_setup.py` | 60 | `item` |
+| `tests/test_codec_setup.py` | 63 | `raw` |
+| `tests/test_codec_setup.py` | 64 | `pin` |
+| `tests/test_codec_setup.py` | 74 | `Response(class)` |
+| `tests/test_codec_setup.py` | 77 | `__init__(self, raw, url)` |
+| `tests/test_codec_setup.py` | 81 | `geturl(self)` |
+| `tests/test_codec_setup.py` | 85 | `provider(raw, pin, calls)` |
+| `tests/test_codec_setup.py` | 88 | `open_url(url)` |
+| `tests/test_codec_setup.py` | 96 | `test_exact_published_wheel_manifest_retains_platform_abi_and_lock_pins()` |
+| `tests/test_codec_setup.py` | 98 | `pins` |
+| `tests/test_codec_setup.py` | 99 | `key` |
+| `tests/test_codec_setup.py` | 99 | `row` |
+| `tests/test_codec_setup.py` | 113 | `lock` |
+| `tests/test_codec_setup.py` | 114 | `row` |
+| `tests/test_codec_setup.py` | 151 | `test_unsupported_runtime_or_abi_never_selects_a_fallback(changes)` |
+| `tests/test_codec_setup.py` | 153 | `values` |
+| `tests/test_codec_setup.py` | 164 | `test_real_wheel_install_is_inert_complete_and_offline_reusable(tmp_path, monkeypatch)` |
+| `tests/test_codec_setup.py` | 166 | `files` |
+| `tests/test_codec_setup.py` | 166 | `pin` |
+| `tests/test_codec_setup.py` | 166 | `raw` |
+| `tests/test_codec_setup.py` | 167 | `calls` |
+| `tests/test_codec_setup.py` | 167 | `home` |
+| `tests/test_codec_setup.py` | 169 | `site` |
+| `tests/test_codec_setup.py` | 172 | `p` |
+| `tests/test_codec_setup.py` | 178 | `before` |
+| `tests/test_codec_setup.py` | 179 | `p` |
+| `tests/test_codec_setup.py` | 184 | `p` |
+| `tests/test_codec_setup.py` | 191 | `test_failed_download_does_not_publish_or_clobber_existing_files(tmp_path, kind)` |
+| `tests/test_codec_setup.py` | 193 | `_` |
+| `tests/test_codec_setup.py` | 193 | `pin` |
+| `tests/test_codec_setup.py` | 193 | `raw` |
+| `tests/test_codec_setup.py` | 194 | `home` |
+| `tests/test_codec_setup.py` | 196 | `protected` |
+| `tests/test_codec_setup.py` | 198 | `altered` |
+| `tests/test_codec_setup.py` | 208 | `fetch(_url)` |
+| `tests/test_codec_setup.py` | 220 | `p` |
+| `tests/test_codec_setup.py` | 235 | `test_actual_traversal_wheels_are_rejected_before_extraction(tmp_path, name)` |
+| `tests/test_codec_setup.py` | 237 | `_` |
+| `tests/test_codec_setup.py` | 237 | `pin` |
+| `tests/test_codec_setup.py` | 237 | `raw` |
+| `tests/test_codec_setup.py` | 262 | `test_independent_wheel_structure_metadata_record_and_inflation_negatives(kind, monkeypatch)` |
+| `tests/test_codec_setup.py` | 264 | `dist` |
+| `tests/test_codec_setup.py` | 266 | `change(files)` |
+| `tests/test_codec_setup.py` | 286 | `_` |
+| `tests/test_codec_setup.py` | 286 | `pin` |
+| `tests/test_codec_setup.py` | 286 | `raw` |
+| `tests/test_codec_setup.py` | 297 | `output` |
+| `tests/test_codec_setup.py` | 298 | `source` |
+| `tests/test_codec_setup.py` | 298 | `target` |
+| `tests/test_codec_setup.py` | 299 | `item` |
+| `tests/test_codec_setup.py` | 300 | `data` |
+| `tests/test_codec_setup.py` | 302 | `data` |
+| `tests/test_codec_setup.py` | 308 | `raw` |
+| `tests/test_codec_setup.py` | 309 | `pin` |
+| `tests/test_codec_setup.py` | 319 | `test_tampered_installed_dependency_is_preserved_and_not_repaired(tmp_path, kind)` |
+| `tests/test_codec_setup.py` | 321 | `_` |
+| `tests/test_codec_setup.py` | 321 | `pin` |
+| `tests/test_codec_setup.py` | 321 | `raw` |
+| `tests/test_codec_setup.py` | 322 | `home` |
+| `tests/test_codec_setup.py` | 323 | `site` |
+| `tests/test_codec_setup.py` | 324 | `path` |
+| `tests/test_codec_setup.py` | 341 | `test_unknown_nonempty_dependency_directory_and_failed_atomic_publish_preserve_prior_state(tmp_path, monkeypatch)` |
+| `tests/test_codec_setup.py` | 345 | `home` |
+| `tests/test_codec_setup.py` | 348 | `_` |
+| `tests/test_codec_setup.py` | 348 | `pin` |
+| `tests/test_codec_setup.py` | 348 | `raw` |
+| `tests/test_codec_setup.py` | 351 | `p` |
+| `tests/test_codec_setup.py` | 352 | `owned` |
+| `tests/test_codec_setup.py` | 354 | `competitor(_pending, pointer)` |
+| `tests/test_codec_setup.py` | 355 | `output` |
+| `tests/test_codec_setup.py` | 363 | `p` |
+| `tests/test_codec_setup.py` | 367 | `test_offline_verification_refuses_unknown_directories_before_descending(tmp_path, monkeypatch, nested)` |
+| `tests/test_codec_setup.py` | 371 | `_` |
+| `tests/test_codec_setup.py` | 371 | `pin` |
+| `tests/test_codec_setup.py` | 371 | `raw` |
+| `tests/test_codec_setup.py` | 372 | `home` |
+| `tests/test_codec_setup.py` | 373 | `site` |
+| `tests/test_codec_setup.py` | 374 | `extra` |
+| `tests/test_codec_setup.py` | 377 | `index` |
+| `tests/test_codec_setup.py` | 378 | `child` |
+| `tests/test_codec_setup.py` | 381 | `actual_scandir` |
+| `tests/test_codec_setup.py` | 381 | `visited` |
+| `tests/test_codec_setup.py` | 383 | `bounded_scan(path)` |
+| `tests/test_codec_setup.py` | 384 | `path` |
+| `tests/test_codec_setup.py` | 392 | `path` |
+| `tests/test_codec_setup.py` | 397 | `test_actual_junction_or_symlink_cannot_replace_expected_dependency_directories(tmp_path, part)` |
 | `tests/test_codec_setup.py` | 399 | `_` |
 | `tests/test_codec_setup.py` | 399 | `pin` |
 | `tests/test_codec_setup.py` | 399 | `raw` |
-| `tests/test_codec_setup.py` | 400 | `calls` |
-| `tests/test_codec_setup.py` | 402 | `root` |
-| `tests/test_codec_setup.py` | 403 | `window` |
-| `tests/test_codec_setup.py` | 414 | `test_real_setup_install_button_finishes_actual_inert_wheel_before_continuing(tmp_path, monkeypatch)` |
-| `tests/test_codec_setup.py` | 420 | `_` |
-| `tests/test_codec_setup.py` | 420 | `pin` |
-| `tests/test_codec_setup.py` | 420 | `raw` |
-| `tests/test_codec_setup.py` | 421 | `actual` |
-| `tests/test_codec_setup.py` | 422 | `calls` |
-| `tests/test_codec_setup.py` | 426 | `root` |
-| `tests/test_codec_setup.py` | 427 | `home` |
-| `tests/test_codec_setup.py` | 428 | `window` |
-| `tests/test_codec_setup.py` | 432 | `deadline` |
-| `tests/test_codec_setup.py` | 440 | `test_setup_failure_remains_visible_without_retry_or_profile_creation(tmp_path, monkeypatch)` |
-| `tests/test_codec_setup.py` | 444 | `_` |
-| `tests/test_codec_setup.py` | 444 | `pin` |
-| `tests/test_codec_setup.py` | 445 | `calls` |
-| `tests/test_codec_setup.py` | 447 | `offline()` |
-| `tests/test_codec_setup.py` | 452 | `root` |
-| `tests/test_codec_setup.py` | 453 | `window` |
-| `tests/test_codec_setup.py` | 456 | `deadline` |
-| `tests/test_codec_setup.py` | 466 | `test_console_consent_and_noninteractive_offline_refusal_are_explicit(tmp_path, monkeypatch, capsys)` |
-| `tests/test_codec_setup.py` | 470 | `_` |
-| `tests/test_codec_setup.py` | 470 | `pin` |
-| `tests/test_codec_setup.py` | 470 | `raw` |
-| `tests/test_codec_setup.py` | 471 | `home` |
-| `tests/test_codec_setup.py` | 478 | `actual` |
-| `tests/test_codec_setup.py` | 482 | `activations` |
+| `tests/test_codec_setup.py` | 400 | `home` |
+| `tests/test_codec_setup.py` | 401 | `site` |
+| `tests/test_codec_setup.py` | 402 | `original` |
+| `tests/test_codec_setup.py` | 403 | `retained` |
+| `tests/test_codec_setup.py` | 415 | `target` |
+| `tests/test_codec_setup.py` | 419 | `test_offline_activation_requires_verified_source_path_and_exact_version(tmp_path, monkeypatch)` |
+| `tests/test_codec_setup.py` | 421 | `_` |
+| `tests/test_codec_setup.py` | 421 | `pin` |
+| `tests/test_codec_setup.py` | 421 | `raw` |
+| `tests/test_codec_setup.py` | 422 | `home` |
+| `tests/test_codec_setup.py` | 423 | `site` |
+| `tests/test_codec_setup.py` | 449 | `test_explicit_setup_cancel_opens_neither_network_nor_profile(tmp_path, monkeypatch)` |
+| `tests/test_codec_setup.py` | 453 | `_` |
+| `tests/test_codec_setup.py` | 453 | `pin` |
+| `tests/test_codec_setup.py` | 453 | `raw` |
+| `tests/test_codec_setup.py` | 454 | `calls` |
+| `tests/test_codec_setup.py` | 456 | `root` |
+| `tests/test_codec_setup.py` | 457 | `window` |
+| `tests/test_codec_setup.py` | 468 | `test_real_setup_install_button_finishes_actual_inert_wheel_before_continuing(tmp_path, monkeypatch)` |
+| `tests/test_codec_setup.py` | 474 | `_` |
+| `tests/test_codec_setup.py` | 474 | `pin` |
+| `tests/test_codec_setup.py` | 474 | `raw` |
+| `tests/test_codec_setup.py` | 475 | `actual` |
+| `tests/test_codec_setup.py` | 476 | `calls` |
+| `tests/test_codec_setup.py` | 480 | `root` |
+| `tests/test_codec_setup.py` | 481 | `home` |
+| `tests/test_codec_setup.py` | 482 | `window` |
+| `tests/test_codec_setup.py` | 486 | `deadline` |
+| `tests/test_codec_setup.py` | 494 | `test_setup_failure_remains_visible_without_retry_or_profile_creation(tmp_path, monkeypatch)` |
+| `tests/test_codec_setup.py` | 498 | `_` |
+| `tests/test_codec_setup.py` | 498 | `pin` |
+| `tests/test_codec_setup.py` | 499 | `calls` |
+| `tests/test_codec_setup.py` | 501 | `offline()` |
+| `tests/test_codec_setup.py` | 506 | `root` |
+| `tests/test_codec_setup.py` | 507 | `window` |
+| `tests/test_codec_setup.py` | 510 | `deadline` |
+| `tests/test_codec_setup.py` | 520 | `test_console_consent_and_noninteractive_offline_refusal_are_explicit(tmp_path, monkeypatch, capsys)` |
+| `tests/test_codec_setup.py` | 524 | `_` |
+| `tests/test_codec_setup.py` | 524 | `pin` |
+| `tests/test_codec_setup.py` | 524 | `raw` |
+| `tests/test_codec_setup.py` | 525 | `home` |
+| `tests/test_codec_setup.py` | 532 | `actual` |
+| `tests/test_codec_setup.py` | 536 | `activations` |
 | `tests/test_desktop_host.py` | 15 | `prepared(tmp_path)` |
 | `tests/test_desktop_host.py` | 17 | `profile` |
 | `tests/test_desktop_host.py` | 24 | `request(host, path)` |
@@ -1156,70 +1179,81 @@ Python/TypeScript ASTs index declarations, parameters and bindings; SQL lists no
 | `workbench/codec_setup.py` | 137 | `base` |
 | `workbench/codec_setup.py` | 139 | `base` |
 | `workbench/codec_setup.py` | 140 | `result` |
-| `workbench/codec_setup.py` | 148 | `store(home)` |
-| `workbench/codec_setup.py` | 154 | `marker` |
-| `workbench/codec_setup.py` | 161 | `output` |
-| `workbench/codec_setup.py` | 170 | `wheel_members(raw, pin)` |
-| `workbench/codec_setup.py` | 176 | `archive` |
-| `workbench/codec_setup.py` | 177 | `items` |
-| `workbench/codec_setup.py` | 179 | `x` |
-| `workbench/codec_setup.py` | 182 | `files` |
-| `workbench/codec_setup.py` | 182 | `total` |
-| `workbench/codec_setup.py` | 183 | `item` |
-| `workbench/codec_setup.py` | 186 | `mode` |
-| `workbench/codec_setup.py` | 186 | `name` |
-| `workbench/codec_setup.py` | 187 | `path` |
-| `workbench/codec_setup.py` | 193 | `part` |
-| `workbench/codec_setup.py` | 204 | `total` |
-| `workbench/codec_setup.py` | 209 | `member` |
-| `workbench/codec_setup.py` | 210 | `data` |
-| `workbench/codec_setup.py` | 216 | `required` |
-| `workbench/codec_setup.py` | 224 | `metadata` |
-| `workbench/codec_setup.py` | 225 | `wheel` |
-| `workbench/codec_setup.py` | 234 | `records` |
-| `workbench/codec_setup.py` | 236 | `row` |
-| `workbench/codec_setup.py` | 238 | `row` |
-| `workbench/codec_setup.py` | 241 | `digest` |
-| `workbench/codec_setup.py` | 241 | `name` |
-| `workbench/codec_setup.py` | 241 | `size` |
-| `workbench/codec_setup.py` | 245 | `expected` |
-| `workbench/codec_setup.py` | 255 | `NoRedirect(class)` |
-| `workbench/codec_setup.py` | 258 | `redirect_request(self, req, fp, code, msg, headers, newurl)` |
-| `workbench/codec_setup.py` | 262 | `download(pin)` |
-| `workbench/codec_setup.py` | 264 | `opener` |
-| `workbench/codec_setup.py` | 267 | `deadline` |
-| `workbench/codec_setup.py` | 268 | `response` |
-| `workbench/codec_setup.py` | 270 | `output` |
-| `workbench/codec_setup.py` | 271 | `chunk` |
-| `workbench/codec_setup.py` | 277 | `raw` |
-| `workbench/codec_setup.py` | 282 | `pointer_name(pin)` |
-| `workbench/codec_setup.py` | 287 | `installed(home, pin)` |
-| `workbench/codec_setup.py` | 291 | `pointer` |
-| `workbench/codec_setup.py` | 295 | `value` |
-| `workbench/codec_setup.py` | 304 | `directory` |
-| `workbench/codec_setup.py` | 308 | `files` |
-| `workbench/codec_setup.py` | 309 | `site` |
-| `workbench/codec_setup.py` | 310 | `actual` |
-| `workbench/codec_setup.py` | 311 | `path` |
-| `workbench/codec_setup.py` | 318 | `name` |
-| `workbench/codec_setup.py` | 318 | `raw` |
-| `workbench/codec_setup.py` | 323 | `install(home, pin)` |
-| `workbench/codec_setup.py` | 326 | `pointer` |
-| `workbench/codec_setup.py` | 331 | `raw` |
-| `workbench/codec_setup.py` | 332 | `files` |
-| `workbench/codec_setup.py` | 333 | `directory` |
-| `workbench/codec_setup.py` | 334 | `published` |
-| `workbench/codec_setup.py` | 337 | `data` |
-| `workbench/codec_setup.py` | 337 | `name` |
-| `workbench/codec_setup.py` | 338 | `path` |
-| `workbench/codec_setup.py` | 340 | `output` |
-| `workbench/codec_setup.py` | 344 | `final` |
-| `workbench/codec_setup.py` | 346 | `directory` |
-| `workbench/codec_setup.py` | 347 | `pending` |
-| `workbench/codec_setup.py` | 356 | `published` |
-| `workbench/codec_setup.py` | 370 | `activate(home, pin)` |
-| `workbench/codec_setup.py` | 372 | `site` |
-| `workbench/codec_setup.py` | 380 | `av` |
+| `workbench/codec_setup.py` | 151 | `store(home)` |
+| `workbench/codec_setup.py` | 160 | `marker` |
+| `workbench/codec_setup.py` | 167 | `output` |
+| `workbench/codec_setup.py` | 176 | `wheel_members(raw, pin)` |
+| `workbench/codec_setup.py` | 182 | `archive` |
+| `workbench/codec_setup.py` | 183 | `items` |
+| `workbench/codec_setup.py` | 185 | `x` |
+| `workbench/codec_setup.py` | 188 | `files` |
+| `workbench/codec_setup.py` | 188 | `total` |
+| `workbench/codec_setup.py` | 189 | `item` |
+| `workbench/codec_setup.py` | 192 | `mode` |
+| `workbench/codec_setup.py` | 192 | `name` |
+| `workbench/codec_setup.py` | 193 | `path` |
+| `workbench/codec_setup.py` | 199 | `part` |
+| `workbench/codec_setup.py` | 210 | `total` |
+| `workbench/codec_setup.py` | 215 | `member` |
+| `workbench/codec_setup.py` | 216 | `data` |
+| `workbench/codec_setup.py` | 222 | `required` |
+| `workbench/codec_setup.py` | 230 | `metadata` |
+| `workbench/codec_setup.py` | 231 | `wheel` |
+| `workbench/codec_setup.py` | 240 | `records` |
+| `workbench/codec_setup.py` | 242 | `row` |
+| `workbench/codec_setup.py` | 244 | `row` |
+| `workbench/codec_setup.py` | 247 | `digest` |
+| `workbench/codec_setup.py` | 247 | `name` |
+| `workbench/codec_setup.py` | 247 | `size` |
+| `workbench/codec_setup.py` | 251 | `expected` |
+| `workbench/codec_setup.py` | 261 | `NoRedirect(class)` |
+| `workbench/codec_setup.py` | 264 | `redirect_request(self, req, fp, code, msg, headers, newurl)` |
+| `workbench/codec_setup.py` | 268 | `download(pin)` |
+| `workbench/codec_setup.py` | 270 | `opener` |
+| `workbench/codec_setup.py` | 273 | `deadline` |
+| `workbench/codec_setup.py` | 274 | `response` |
+| `workbench/codec_setup.py` | 276 | `output` |
+| `workbench/codec_setup.py` | 277 | `chunk` |
+| `workbench/codec_setup.py` | 283 | `raw` |
+| `workbench/codec_setup.py` | 288 | `pointer_name(pin)` |
+| `workbench/codec_setup.py` | 293 | `installed(home, pin)` |
+| `workbench/codec_setup.py` | 297 | `pointer` |
+| `workbench/codec_setup.py` | 301 | `value` |
+| `workbench/codec_setup.py` | 310 | `directory` |
+| `workbench/codec_setup.py` | 318 | `files` |
+| `workbench/codec_setup.py` | 319 | `site` |
+| `workbench/codec_setup.py` | 327 | `expected_directories` |
+| `workbench/codec_setup.py` | 329 | `name` |
+| `workbench/codec_setup.py` | 330 | `parent` |
+| `workbench/codec_setup.py` | 333 | `actual` |
+| `workbench/codec_setup.py` | 333 | `pending` |
+| `workbench/codec_setup.py` | 333 | `visited` |
+| `workbench/codec_setup.py` | 335 | `current` |
+| `workbench/codec_setup.py` | 340 | `entries` |
+| `workbench/codec_setup.py` | 341 | `entry` |
+| `workbench/codec_setup.py` | 342 | `visited` |
+| `workbench/codec_setup.py` | 347 | `path` |
+| `workbench/codec_setup.py` | 348 | `name` |
+| `workbench/codec_setup.py` | 359 | `info` |
+| `workbench/codec_setup.py` | 369 | `name` |
+| `workbench/codec_setup.py` | 369 | `raw` |
+| `workbench/codec_setup.py` | 374 | `install(home, pin)` |
+| `workbench/codec_setup.py` | 377 | `pointer` |
+| `workbench/codec_setup.py` | 382 | `raw` |
+| `workbench/codec_setup.py` | 383 | `files` |
+| `workbench/codec_setup.py` | 384 | `directory` |
+| `workbench/codec_setup.py` | 385 | `published` |
+| `workbench/codec_setup.py` | 388 | `data` |
+| `workbench/codec_setup.py` | 388 | `name` |
+| `workbench/codec_setup.py` | 389 | `path` |
+| `workbench/codec_setup.py` | 391 | `output` |
+| `workbench/codec_setup.py` | 395 | `final` |
+| `workbench/codec_setup.py` | 397 | `directory` |
+| `workbench/codec_setup.py` | 398 | `pending` |
+| `workbench/codec_setup.py` | 407 | `published` |
+| `workbench/codec_setup.py` | 421 | `activate(home, pin)` |
+| `workbench/codec_setup.py` | 423 | `site` |
+| `workbench/codec_setup.py` | 431 | `av` |
 | `workbench/codec_window.py` | 10 | `TERMS` |
 | `workbench/codec_window.py` | 20 | `DependencyWindow(class)` |
 | `workbench/codec_window.py` | 23 | `__init__(self, root, home, pin)` |

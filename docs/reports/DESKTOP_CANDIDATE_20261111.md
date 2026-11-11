@@ -39,6 +39,13 @@ This is a technical distribution design, not legal or patent clearance. See
 - Windows ZIP readers normalize backslashes. The new actual malformed-wheel
   fixture caught that detail; extraction checks original stored names as well as
   the normalized name, preserving the same refusal across operating systems.
+- Independent review found that the initial offline verifier traversed unknown
+  directory trees before comparing its file inventory; an extra empty directory
+  was also ignored. The verifier now derives the exact expected files/parents,
+  counts visited entries and refuses extras before recursion, including actual
+  site/member junctions on Windows. Both independent unknown-tree regressions
+  failed against the exact old `27339048230587550b5fb39a44714645d9711bea`
+  implementation and passed after the fix. Unexpected contents remain preserved.
 - Earlier combined-codec packaging passed media tests but its upstream
   source/license recipe completeness was not established. That candidate and
   investigation are retained privately as held historical development evidence.
@@ -74,10 +81,10 @@ native/hosted results must be recorded separately after they actually complete.
 
 ## Source tests and limits
 
-Final full source validation passed **252 parent Python tests plus all 13mandatory
-isolated notice cases**, with **93.80% branch-aware package coverage** against the
+Final full source validation passed **256 parent Python tests plus all 13 mandatory
+isolated notice cases**, with **93.86% branch-aware package coverage** against the
 unchanged 90% floor. One existing Windows symlink-capability skip is explicitly
-reported; Linux and macOS must exercise that capability in CI. The252include 47 new
+reported; Linux and macOS must exercise that capability in CI. These include 51 new
 real-wheel/Tk contracts and five codec-free bundle-inventory cases, plus the
 codec-free shell/entry failure and actual notice-inventory regressions. Corrupt,
 truncated, oversized or offline providers, wrong ABI/version/name, unsafe ZIP paths

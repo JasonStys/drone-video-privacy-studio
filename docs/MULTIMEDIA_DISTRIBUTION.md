@@ -56,7 +56,11 @@ Only a completely extracted wheel receives an exclusive atomic activation pointe
 An earlier pointer/install or unrelated nonempty directory is never overwritten.
 Before every native app or worker import, the original wheel and all extracted
 bytes are reverified offline. Changed or unexpected files are preserved and refused,
-not silently repaired or downloaded. The store uses the current OS user's local
+not silently repaired or downloaded.
+Verification walks only the exact precomputed wheel files and parent directories,
+counts visited entries against that fixed tree and refuses extras before descending;
+site/root/member symlinks and Windows junctions are refused before traversal.
+The store uses the current OS user's local
 application-data area outside the program and footage/account profiles. An explicit
 trusted-owner `DVP_DEPENDENCY_HOME` override supports isolated acceptance or a
 chosen dependency location; it does not alter browser permissions. A hostile OS
