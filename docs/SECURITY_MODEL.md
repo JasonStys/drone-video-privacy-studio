@@ -31,6 +31,18 @@ The UI clears private selection/media sources on logout and rejects late respons
 
 ## Release hygiene
 
+The native download excludes PyAV/av.libs/FFmpeg codecs. Before any profile opens,
+explicit first-run native consent permits only the pinned official PyPI wheel.
+No arbitrary URL, proxy credentials, redirect, pip or source-build hook is used.
+Whole-wheel SHA/size, ABI, bounded ZIP members and every RECORD hash are checked;
+an exclusive pointer activates only a complete private install. Later application
+and worker starts recheck its exact bytes offline; tampered/unknown directories
+are refused and preserved. The provider sees normal request/connection metadata,
+not footage, account or profile data. The trusted OS owner can alter any local
+program or store; this is not protection against that owner or an OS sandbox.
+See [setup/distribution scope](MULTIMEDIA_DISTRIBUTION.md) for current pins,
+upstream obligations and first-install/offline limitations.
+
 Approval is an application workflow boundary, not DRM. An authorized reader can save/screen-capture a private preview or already received derivative. The designated export route is blocked until review, but a server cannot revoke bytes already disclosed to a permitted reader. Codec-independent frame rendering uses only hash-checked sanitized preview/current derivative, with the same ownership/version/expiry checks and a second version check after native decoding; no PNG cache persists. It does not expose raw originals or widen reader roles.
 
 Python and npm have exact versions/integrity locks; Python installs vendor wheels only. Required live advisory checks fail on findings/unavailable/incomplete results, with no advisory suppressions. Complete npm inventory is independently verified. Native FFmpeg versions are printed by the benchmark; pip/npm advisory scans do **not** prove that every bundled FFmpeg/codec component is free of CVEs. Review [FFmpeg security](https://ffmpeg.org/security.html), wheel provenance and vendor notices before upgrades or real sensitive use. CodeQL covers Python and TypeScript, not a full native FFmpeg audit.

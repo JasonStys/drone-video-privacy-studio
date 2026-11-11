@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "product": "drone-video-privacy-studio",
+  "dependency": "av",
+  "version": "19.0.2",
+  "wheels": {
+    "win32-amd64": {
+      "filename": "av-19.0.2-cp312-abi3-win_amd64.whl",
+      "url": "https://files.pythonhosted.org/packages/32/5a/743a83666ded197df8b9957e2800bef9a39d52b23be2ca211bbd14b5fb22/av-19.0.2-cp312-abi3-win_amd64.whl",
+      "bytes": 28150949,
+      "sha256": "3ce5a1d7b916d13c16ac58f1756f0fee4af2d53f02bc1403e18550b50d375a22",
+      "tag": "cp312-abi3-win_amd64"
+    },
+    "linux-x86_64": {
+      "filename": "av-19.0.2-cp312-abi3-manylinux_2_28_x86_64.whl",
+      "url": "https://files.pythonhosted.org/packages/e1/7f/9f1237feb894afa472ef834aa1fbfe4d6398f28dc7e86a1b418650204c36/av-19.0.2-cp312-abi3-manylinux_2_28_x86_64.whl",
+      "bytes": 34990159,
+      "sha256": "9c1da7aad0fa6c13b4a5c1e7985be0d13f8526a96284573acaf3d55ead6d3fe8",
+      "tag": "cp312-abi3-manylinux_2_28_x86_64"
+    },
+    "darwin-arm64": {
+      "filename": "av-19.0.2-cp312-abi3-macosx_14_0_arm64.whl",
+      "url": "https://files.pythonhosted.org/packages/7c/42/067d0bcd2c07103f18cc23b510a8289dd80330e984c49d51ce0bafcee017/av-19.0.2-cp312-abi3-macosx_14_0_arm64.whl",
+      "bytes": 18556422,
+      "sha256": "b0dff6dfcc6ff9944fbbff15bc4ee2d90a2c1695d493bdea96e86f48823e9feb",
+      "tag": "cp312-abi3-macosx_14_0_arm64"
+    }
+  }
+}

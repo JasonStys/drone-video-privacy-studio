@@ -1,7 +1,7 @@
 # Jason Stys: strict lint and branch-aware application coverage gates; no advisory suppressions.
 [project]
 name = "drone-video-privacy-studio"
-version = "0.1.0"
+version = "0.2.0"
 requires-python = ">=3.12"
 [tool.pytest.ini_options]
 testpaths = ["tests"]

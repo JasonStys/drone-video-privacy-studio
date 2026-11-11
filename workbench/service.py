@@ -19,7 +19,7 @@ from fastapi import HTTPException
 from workbench.media import MAX_BYTES
 from workbench.models import Plan
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(getattr(sys, "_MEIPASS", Path(__file__).resolve().parents[1]))
 PROCESSING = threading.BoundedSemaphore(1)
 
 
@@ -39,6 +39,15 @@ def workspace(store):
         PROCESSING.release()
 
 
+def worker_command(directory: Path) -> list[str]:
+    """Frozen media work re-enters only this executable's fixed worker mode; source mode retains the original module."""
+    return (
+        [sys.executable, "--media-worker", str(directory)]
+        if getattr(sys, "frozen", False)
+        else [sys.executable, "-m", "workbench.worker", str(directory)]
+    )
+
+
 def run(directory, masks, scenario=None, frame=None):
     """Execute only this package's worker, no shell; kill/wait after 90 s and discard all output on error."""
     (directory / "job.json").write_text(
@@ -54,10 +63,11 @@ def run(directory, masks, scenario=None, frame=None):
     )
     try:
         result = subprocess.run(  # noqa: S603 - fixed interpreter/module; service-generated path, no shell or client command.
-            [sys.executable, "-m", "workbench.worker", str(directory)],
+            worker_command(directory),
             cwd=ROOT,
             timeout=90,
             check=False,
+            stdin=subprocess.DEVNULL,
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL,
         )

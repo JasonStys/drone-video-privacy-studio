@@ -142,6 +142,9 @@ function text(id: string, message: string): void {
 }
 /** Keep native-frame backpressure visible; never invite a second heavy job before its preview finishes. */
 function buttons(): void {
+  // Do not accept new credentials while bootstrap/logout may clear an older password.
+  for (const id of ["username", "password"])
+    el<HTMLInputElement>(id).disabled = busy || logoutPending;
   for (const button of document.querySelectorAll<HTMLButtonElement>("button"))
     button.disabled =
       logoutPending || (button.id !== "logout" && (busy || frameLoading));
@@ -649,3 +652,9 @@ void task(async () => {
     text("message", "Sign in with your locally provisioned account");
   }
 });
+
+/** Display the actual package release without changing domain policy/schema versions. */
+const releaseFooter = document.createElement("span");
+releaseFooter.id = "application-version";
+releaseFooter.textContent = `Application v${__APP_VERSION__} / `;
+document.querySelector("footer")?.prepend(releaseFooter);

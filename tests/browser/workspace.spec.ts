@@ -277,3 +277,31 @@ test("keyboard, mobile layout, help and WCAG automated checks", async ({
     ),
   ).toBe(true);
 });
+
+test("initial session lookup protects newly entered credentials", async ({
+  page,
+}) => {
+  let release!: () => void;
+  let observed!: () => void;
+  const hold = new Promise<void>((resolve) => {
+    release = resolve;
+  });
+  const responseReady = new Promise<void>((resolve) => {
+    observed = resolve;
+  });
+  await page.route("**/api/me", async (route) => {
+    const response = await route.fetch();
+    expect(response.status()).toBe(401);
+    observed();
+    await hold;
+    await route.fulfill({ response });
+  });
+  await page.goto("/");
+  await responseReady;
+  await expect(page.getByLabel("Username", { exact: true })).toBeDisabled();
+  await expect(page.getByLabel("Password", { exact: true })).toBeDisabled();
+  release();
+  await expect(page.getByLabel("Password", { exact: true })).toBeEnabled();
+  await signIn(page);
+  await expect(page.locator("#workspace")).toBeVisible();
+});
