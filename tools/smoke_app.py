@@ -65,7 +65,7 @@ def main(argv=None):
     args = parser.parse_args(argv)
     executable = args.executable.resolve()
     expected = json.loads(read_resource(executable.parent / "RELEASE.json"))
-    require(expected["name"] == PRODUCT and expected["version"] == "0.2.0", "Wrong application")
+    require(expected["name"] == PRODUCT and expected["version"] == "0.2.1", "Wrong application")
     require(re.fullmatch(r"[a-f0-9]{40}", expected["source_commit"]), "Invalid source identity")
     require(
         json.loads(read_resource(executable.parent / "_internal/workbench/resources/RELEASE.json"))
@@ -169,6 +169,9 @@ def main(argv=None):
         + "\n",
         encoding="utf-8",
     )
+    from profile_admission_smoke import verify as verify_profile_admission
+
+    verify_profile_admission(executable, output, environment)
     profile = Profile(profile_directory)
     expected_cookie = profile.cookie_name
     try:

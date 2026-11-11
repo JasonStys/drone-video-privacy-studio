@@ -101,7 +101,7 @@ async function download(link, filename) {
 
 try {
   await login("operator");
-  await expect(page.locator("#application-version")).toContainText("v0.2.0");
+  await expect(page.locator("#application-version")).toContainText("v0.2.1");
   assert.deepEqual(
     await (await page.request.get(new URL("api/clips", base).href)).json(),
     [],

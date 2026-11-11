@@ -1,7 +1,7 @@
 <!-- Jason Stys: full native staff-workspace setup, supported media workflow, shutdown and packaging limits. -->
 # Desktop application candidate
 
-Version 0.2.0 packages the existing authenticated video review application. The
+Version 0.2.1 packages the existing authenticated video review application. The
 native owner window starts a private local service and opens the same browser UI;
 it does not create a second demonstration product. No public binary has been
 approved by this candidate report. The download excludes PyAV/FFmpeg codecs;
@@ -119,3 +119,9 @@ Automated evidence includes actual source-level Tk controls, the frozen GUI
 runtime diagnostic and real browser interaction against the extracted executable.
 It does not claim a manually clicked native owner window, a clean OS install,
 code signing, an OS sandbox or a successful full upstream codec rebuild.
+
+## Profile path admission
+
+Choose an ordinary physical directory outside the extracted application. Existing ancestors must be real directories: symbolic links and Windows reparse points (including junctions) are refused. The identity, owner lock, SQLite database and any journal/WAL/SHM companions must be regular singly linked files; an unsafe member is refused before opening/writing the workspace. The frozen executable/internal directories and enclosing macOS .app bundle are never data locations. Privacy footage also requires a real media root. Ordinary existing identified profiles need no migration/reset; their accounts, roles and cookie namespace remain compatible.
+
+These are pre-mutation guards for accidental/trusted-owner path mistakes. The same OS account and administrators remain trusted; SQLite/pathname APIs do not provide an atomic namespace against a concurrent same-OS-user replacing entries after admission. Stop normally and retain the entire external profile. [Dated reproduction and validation](reports/PROFILE_PATH_ADMISSION_20261111.md).

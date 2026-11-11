@@ -45,7 +45,7 @@ The subprocess deadline and size/codec caps are defense in depth, **not an OS sa
 
 ## Desktop application candidate
 
-The 0.2.0 source adds a portable application containing this same review desk
+The 0.2.1 source adds a portable application containing this same review desk
 and local database, with explicit first-run setup of its exact official codec wheel. It is a complete staff workflow, not a separate
 demo: import any supported authorized clip, edit frame-specific masks, inspect the
 actual output, switch to a separately provisioned reviewer and download the
@@ -65,6 +65,8 @@ The application download excludes PyAV/FFmpeg codecs. Its initial setup screen
 explains the official pinned provider, size, ABI, hash and upstream terms and offers
 Install or Cancel before opening any profiles; subsequent use is offline. See [desktop setup and
 tests](docs/DESKTOP.md) and [multimedia distribution scope](docs/MULTIMEDIA_DISTRIBUTION.md).
+
+The 0.2.1 patch refuses profile paths through symbolic links, Windows junctions/reparse points, linked database/identity files or frozen application directories **before workspace writes**. Existing ordinary external profiles, accounts, roles and records retain their schema and cookie namespace. [Path-admission evidence and limits](docs/reports/PROFILE_PATH_ADMISSION_20261111.md).
 
 ## Run locally from source
 
