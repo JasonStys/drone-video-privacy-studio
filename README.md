@@ -43,13 +43,36 @@ There is **no automatic face/plate detector**. A mask only protects its specifie
 
 The subprocess deadline and size/codec caps are defense in depth, **not an OS sandbox**. Untrusted codecs can contain vulnerabilities. This release is for trusted local staff using controlled short clips; do not expose it to public uploads. Runtime data is not encrypted by this application; use OS accounts, restricted directory permissions and disk encryption. The OS owner, backups and authorized organizational reviewers can access data. See [security boundaries](docs/SECURITY_MODEL.md) before using real footage.
 
-## Run locally
+## Desktop application candidate
+
+The 0.2.0 source adds a portable application containing this same review desk
+and local database, with explicit first-run setup of its exact official codec wheel. It is a complete staff workflow, not a separate
+demo: import any supported authorized clip, edit frame-specific masks, inspect the
+actual output, switch to a separately provisioned reviewer and download the
+approved current revision. Optional synthetic inputs remain inside this workflow.
+
+The native owner window chooses a private workspace and provisions its first
+administrator without a default password or anonymous setup endpoint. Separate
+operator/reviewer accounts retain the existing server permissions. **Open full
+application** opens the owned loopback service; **Quit application** waits for it
+to finish before releasing the workspace lock. Closing a browser tab does not quit
+the application. User accounts/media live outside the extracted program directory.
+
+This is an **unpublished candidate**, not an available installer. Windows extracted
+application acceptance has exercised real processing, roles, downloads and normal
+shutdown; cross-platform hosted gates must validate the exact committed source.
+The application download excludes PyAV/FFmpeg codecs. Its initial setup screen
+explains the official pinned provider, size, ABI, hash and upstream terms and offers
+Install or Cancel before opening any profiles; subsequent use is offline. See [desktop setup and
+tests](docs/DESKTOP.md) and [multimedia distribution scope](docs/MULTIMEDIA_DISTRIBUTION.md).
+
+## Run locally from source
 
 Codec-limited browsers can use **frame-by-frame review**: the service renders the selected authenticated current-version frame as a fresh metadata-free PNG. The UI falls back automatically on playback failure and also offers an explicit button. Move the slider, then **Load selected frame**; no audio or persistent PNG cache is created. Continuous playback is optional; the MP4 export remains real H.264. This fallback is tested on Windows WebKit rather than skipping inspection when its video codec is unavailable.
 
 These controls are **not DRM**: authorized reviewers/operators can save or screen-capture media they are allowed to view, including an unapproved private preview. Approval gates the designated export route; it cannot stop a permitted reader from misusing already disclosed pixels. Use trusted staff and organizational sharing controls.
 
-Requires Python 3.12–3.14 (64-bit) and Node.js 24. Windows, Linux and macOS native wheels are validated in CI. FFmpeg is bundled in the pinned PyAV wheel; no Docker, system FFmpeg, GPU, recognition model or API key is needed. Browser H.264 decoding is required; codecs supplied by the OS/browser can vary.
+Requires Python 3.12–3.14 (64-bit) and Node.js 24. Windows, Linux and macOS native wheels are validated in CI. FFmpeg is bundled in the pinned PyAV wheel; no Docker, system FFmpeg, GPU, recognition model or API key is needed. Browser H.264 playback support can vary; authenticated frame-by-frame review remains available when playback is unavailable.
 
 ```powershell
 python -m venv .venv
@@ -116,7 +139,14 @@ Every authored file has a responsibility in the [complete file catalog](docs/FIL
 
 Made by **Jason Stys** · [GitHub portfolio](https://github.com/JasonStys) · [Contact on LinkedIn](https://www.linkedin.com/in/jason-stys-31b30b351/).
 
-Original source is MIT licensed. PyAV and its bundled FFmpeg/codecs retain their own licenses and obligations; this repository distributes source/locks, not a repackaged native installer. See [third-party notes](docs/RESEARCH.md). No employer endorsement or regulatory certification is implied.
+Original application source is MIT licensed. The native application download
+excludes PyAV/av.libs/FFmpeg codecs; after explicit first-run consent, the user
+acquires an exact hash-verified official PyPI wheel directly from its provider.
+That dependency retains all upstream notices and terms in a separate private local
+store. Neither this acquisition design nor the retained component notices certify
+legal compliance or grant codec-patent clearance. See [dependency setup and scope](docs/MULTIMEDIA_DISTRIBUTION.md)
+and [third-party research](docs/RESEARCH.md). No employer endorsement, anonymity
+guarantee or regulatory/legal certification is implied.
 
 ## Documentation editions
 

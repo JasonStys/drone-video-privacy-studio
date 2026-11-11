@@ -4,6 +4,7 @@ Exact endpoint/variable lines: docs/SOURCE_MAP.md. No public original-file or re
 """
 
 import asyncio
+import re
 import threading
 from pathlib import Path
 from typing import Annotated, Literal
@@ -30,8 +31,10 @@ HEADERS = {
 BODY_GATE = threading.BoundedSemaphore(2)
 
 
-def create_app(database: Path, port=8891):
+def create_app(database: Path, port=8891, *, cookie_name="video_session"):
     """Bind one local organization to an exact authority; not hardened public SaaS hosting."""
+    if not isinstance(cookie_name, str) or not re.fullmatch(r"[a-z][a-z0-9_]{2,63}", cookie_name):
+        raise ValueError("Invalid session cookie namespace")
     if not 1024 <= port <= 65535:
         raise ValueError("Port outside supported range")
     origin, authority = f"http://127.0.0.1:{port}", f"127.0.0.1:{port}"
@@ -39,6 +42,7 @@ def create_app(database: Path, port=8891):
         title="Drone Video Privacy Studio", docs_url=None, redoc_url=None, openapi_url=None
     )
     app.state.store = Store(database)
+    app.state.session_cookie_name = cookie_name
 
     @app.middleware("http")
     async def boundary(request: Request, call_next):
@@ -98,14 +102,22 @@ def create_app(database: Path, port=8891):
     @app.get("/healthz")
     def health():
         """Liveness only; no account, filesystem or media details."""
-        return {"status": "ok", "mode": "local-private-video-review"}
+        return {
+            "status": "ok",
+            "mode": "local-private-video-review",
+            **(
+                {"desktop": app.state.desktop_identity}
+                if hasattr(app.state, "desktop_identity")
+                else {}
+            ),
+        }
 
     @app.post("/api/login")
     def login(body: Login, request: Request):
         """Issue an HttpOnly opaque session, hashed server-side, with separate same-origin CSRF token."""
         token, user = auth.sign_in(request, body.username, body.password)
         response = JSONResponse(user)
-        response.set_cookie("video_session", token, httponly=True, samesite="strict", max_age=3600)
+        response.set_cookie(cookie_name, token, httponly=True, samesite="strict", max_age=3600)
         return response
 
     @app.get("/api/me")
@@ -118,7 +130,7 @@ def create_app(database: Path, port=8891):
         """Revoke immediately, then clear the same local cookie."""
         auth.sign_out(request)
         response = JSONResponse({"signed_out": True})
-        response.delete_cookie("video_session")
+        response.delete_cookie(cookie_name)
         return response
 
     @app.get("/api/clips")
