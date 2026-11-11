@@ -683,15 +683,17 @@ Python/TypeScript ASTs index declarations, parameters and bindings; SQL lists no
 | `tests/test_profile_paths.py` | 119 | `ordinary` |
 | `tests/test_profile_paths.py` | 128 | `test_read_only_missing_member_never_creates_it(tmp_path)` |
 | `tests/test_profile_paths.py` | 130 | `path` |
-| `tests/test_profile_paths.py` | 136 | `test_opened_identity_replacement_is_rejected_and_descriptor_closed(tmp_path, monkeypatch)` |
-| `tests/test_profile_paths.py` | 138 | `path` |
-| `tests/test_profile_paths.py` | 139 | `replacement` |
-| `tests/test_profile_paths.py` | 142 | `original_open` |
-| `tests/test_profile_paths.py` | 143 | `observed` |
-| `tests/test_profile_paths.py` | 145 | `replace_then_open(candidate, flags, mode)` |
-| `tests/test_profile_paths.py` | 147 | `descriptor` |
-| `tests/test_profile_paths.py` | 159 | `test_existing_nonregular_identity_member_is_refused(tmp_path)` |
-| `tests/test_profile_paths.py` | 161 | `chosen` |
+| `tests/test_profile_paths.py` | 132 | `descriptor` |
+| `tests/test_profile_paths.py` | 140 | `test_opened_identity_replacement_is_rejected_and_descriptor_closed(tmp_path, monkeypatch)` |
+| `tests/test_profile_paths.py` | 142 | `path` |
+| `tests/test_profile_paths.py` | 143 | `replacement` |
+| `tests/test_profile_paths.py` | 146 | `original_open` |
+| `tests/test_profile_paths.py` | 147 | `observed` |
+| `tests/test_profile_paths.py` | 149 | `replace_then_open(candidate, flags, mode)` |
+| `tests/test_profile_paths.py` | 151 | `descriptor` |
+| `tests/test_profile_paths.py` | 157 | `descriptor` |
+| `tests/test_profile_paths.py` | 167 | `test_existing_nonregular_identity_member_is_refused(tmp_path)` |
+| `tests/test_profile_paths.py` | 169 | `chosen` |
 | `tests/test_publication_text.py` | 15 | `edition(root, name, main, text)` |
 | `tests/test_publication_text.py` | 17 | `path` |
 | `tests/test_publication_text.py` | 19 | `package` |
