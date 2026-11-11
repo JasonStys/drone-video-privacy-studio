@@ -1,0 +1,81 @@
+{
+  "schema": 1,
+  "repository": "drone-video-privacy-studio",
+  "runtimeVersion": "0.2.1",
+  "runtimeSource": "7062adeee5f7c2476086b0143b31c156941fa06f",
+  "createdAt": "2026-11-11T15:24:35.160Z",
+  "author": "Jason Stys",
+  "document": "windows-application-guide-0.2.1.docx",
+  "sha256": "cf0a281fa1b5eba3390a8d9d935cce2e968486b1e01ced5515033c95566b817e",
+  "screenshots": [
+    {
+      "file": "01-processed-moving-mask-frame.png",
+      "sha256": "89688253335ef117817f52351211f0053065a352c125012ef82871e5c3977f05",
+      "width": 1042,
+      "height": 854,
+      "caption": "The actual installed app shows two black regions in a processed synthetic frame, separately from draft overlays."
+    },
+    {
+      "file": "02-independent-reviewed-export.png",
+      "sha256": "ef66dd4cd571f991a6d4917f9e23315cc24c5841bc4419eb4044ba9f7c81d546",
+      "width": 514,
+      "height": 522,
+      "caption": "A different reviewer approved the retained fictional revision; the app permits the reviewed MP4 and minimal receipt exports."
+    }
+  ],
+  "snippets": [
+    {
+      "file": "workbench/media.py",
+      "first": 41,
+      "last": 48,
+      "sha256": "df89605222713ecf62dbc427b4544f1dd6c27ff0fa7b19e540afc340fc62d1dc",
+      "url": "https://github.com/JasonStys/drone-video-privacy-studio/blob/7062adeee5f7c2476086b0143b31c156941fa06f/workbench/media.py#L41"
+    }
+  ],
+  "observedTests": [
+    {
+      "name": "Original installed workflow",
+      "observed": "Actual import, moving-mask processing, independent review, metadata-minimized export and negative cases passed. Installed resources stayed unchanged.",
+      "result": "Passed"
+    },
+    {
+      "name": "Same-profile upgrade",
+      "observed": "Actual 0.2.0 to 0.2.1 retained revisions, media, reviews and every original audit event across three roles. New read/export events appended; both exits were normal.",
+      "result": "Passed"
+    },
+    {
+      "name": "Distribution and security",
+      "observed": "Both provider-hash-verified downloads, all 163 installed file hashes, current main workflows and two processed raw CodeQL analyses passed.",
+      "result": "Passed"
+    },
+    {
+      "name": "Local boundary",
+      "observed": "Only synthetic media/accounts were used. Desktop/Start-menu targets were verified; ordinary profile activation and clean-machine installation are separate untested scopes.",
+      "result": "Verified"
+    }
+  ],
+  "visualReview": {
+    "approved": true,
+    "reviewer": "audit_apps",
+    "ooxmlSchema": "passed",
+    "pages": [
+      {
+        "page": 1,
+        "sha256": "ef610e3cb9d2ba63483da5f8972d6ed6e8661832ef23d56d42502a37a67ff1ca"
+      },
+      {
+        "page": 2,
+        "sha256": "f104f3566257e73e10f1cdc43ebfa7bbfa0bb393d2646148421134431ed05568"
+      },
+      {
+        "page": 3,
+        "sha256": "bd366dd991a6a04687a51c113f446381bc4725755db2fd242e640c3d32e606ba"
+      },
+      {
+        "page": 4,
+        "sha256": "2201718a62231fc61dec4531f27fd2bfa827ec2062e2d7a0ab866504677232a9"
+      }
+    ],
+    "scope": "All four final pages individually viewed; actual installed synthetic screenshots and immutable-source snippets; earlier editions retained."
+  }
+}
